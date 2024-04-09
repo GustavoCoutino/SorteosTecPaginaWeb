@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrate</title>
+    <link rel="stylesheet" href="general.css">   
+</head>
+<body>
+    <a href="index.html">
+        <img class="image5" src="Assets/atras.png"/>
+    </a>
+    <h2>Regístrate</h1>
+    <div class="ddiv">
+        <form id="formulario-usuario" onsubmit="crearUsuario(event)">
+            <div class="divH">
+                <div class="divIn">
+                    <p class="izq">Nombre</p>
+                    <input placeholder="Regina" class="doblefila" id="nombre" name="nombre" />
+                </div>
+                <div class="divIn">
+                    <p class="izq">Apellido Materno</p>
+                    <input placeholder="Reyes" class="doblefila" id="apellido_materno" name="nombre" />
+                </div>
+                <div class="divIn">
+                    <p class="izq">Apellido Paterno</p>
+                    <input placeholder="Juárez" class="doblefila" id="apellido_paterno" name="nombre"/>
+                </div>
+            </div>
+            <div class="divH">
+                <div class="divIn">
+                    <p class="izq">Estado</p>
+                    <input placeholder="Hidalgo" class="doblefila" class="inputt" id="estado" name="estado"/>
+                </div>
+                <div class="divIn">
+                    <p class="izq">Ciudad</p>
+                    <input placeholder="Pachuca" class="doblefila" class="inputt" id="ciudad" name="ciudad"/>
+                </div>
+                <div class="divIn">
+                    <p class="izq">Contraseña</p>
+                    <input placeholder="**********" class="doblefila" type="password" class="inputt" id="contraseña" name="contraseña"/>
+                </div>
+            </div>
+            <div class="divH">
+                <div class="divIn">
+                    <p class="izq">Correo electrónico</p>
+                    <input placeholder="a00@tec.mx" class="doblefila" type="email" id="correo" name="correo"/>
+                </div>
+                <div class="divIn">
+                    <p class="izq">Teléfono</p>
+                    <input placeholder="5519167800" class="doblefila" type="tel" id="telefono" name="telefono"/>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <button class="boton3" type="submit">Ingresar</button>
+            <img class="image2" src="Assets/palanca.png"/>
+        </form> 
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

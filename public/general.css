@@ -1,0 +1,333 @@
+html {
+  font-family: "Poppins";
+  color: #233479;
+}
+
+body {
+  background-color: white;
+  margin: 30px; /* POR EDITAR */
+  margin-left: 180px;
+  margin-right: 180px;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+h1 {
+  font-size: 110px;
+}
+
+h2 {
+  font-size: 90px;
+}
+
+h3 {
+  font-size: 50px;
+}
+
+h4 {
+  font-size: 35px;
+  text-align: center;
+  font-weight: 500;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+p {
+  font-size: 40px;
+  margin-bottom: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 25px;
+  margin-top: 70px;
+}
+
+input,
+.input,
+.inputt {
+  background-color: #d3e6f9;
+  border-radius: 37px;
+  padding: 15px;
+  border-width: 0px;
+  font-size: 20px;
+  padding-left: 25px;
+  margin-top: 0px;
+  width: 100%;
+}
+
+.inputt {
+  margin-bottom: 44px;
+}
+
+.div {
+  background-color: #e2f1ff;
+  border-radius: 20px;
+  text-align: center;
+  padding: 40px 0px 20px 0px;
+  padding-left: 60px;
+  padding-right: 60px;
+  margin: 12px;
+}
+
+.ddiv {
+  background-color: #e2f1ff;
+  border-radius: 20px;
+  text-align: center;
+  padding: 30px;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+.izq {
+  text-align: left;
+}
+
+.ddiv-centrado {
+  background-color: #e2f1ff;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  text-align: left;
+  padding: 30px;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+.boton1,
+.boton2 {
+  border-radius: 13px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding: 12px;
+  margin: 12px;
+}
+.boton1 {
+  background-color: #3651a6;
+}
+
+.boton2 {
+  background-color: #5f76c0;
+}
+
+.boton3 {
+  text-decoration: none;
+  color: white;
+  font-size: 25px;
+  margin-top: 70px;
+  background-color: #233479;
+  padding: 12px;
+  border-radius: 37px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+}
+
+.divH {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.divHAlignIz {
+  display: flex;
+  flex-direction: row;
+}
+
+.divIn {
+  margin-left: 55px;
+}
+
+.div-content {
+  margin-top: 50px;
+}
+
+.image1,
+.image2 {
+  bottom: 0;
+  right: 0;
+}
+
+.image1 {
+  width: 320px;
+  position: fixed;
+  margin-bottom: 40px;
+  margin-right: 80px;
+}
+
+.image2 {
+  width: 270px;
+  position: absolute;
+  margin-bottom: 30px;
+  margin-right: 60px;
+}
+
+.image3 {
+  width: 150px;
+}
+
+.image4 {
+  width: 180px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 190px;
+  margin-left: 150px;
+}
+
+.image5 {
+  width: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 50px;
+  margin-left: 40px;
+}
+
+.image6 {
+  width: 100px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 80px;
+  margin-right: 150px;
+}
+
+.imageLogo {
+  width: 50px;
+  padding: 12px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.imageTarjeta {
+  width: 100px;
+  padding: 5px;
+}
+
+.pcentro {
+  text-align: center;
+  font-size: 30px;
+  margin-top: 0px;
+}
+
+.doblefila {
+  width: 300px;
+}
+
+.izquierda .divH {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.izquierdaEspacio {
+  margin-left: 30px;
+}
+
+.izquierdaEspaciador {
+  margin-left: 170px;
+}
+
+.p1,
+.p2 {
+  text-align: left;
+  margin-top: 0px;
+}
+
+.p1 {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+.p2 {
+  font-size: 20px;
+}
+
+.div-pequeño {
+  margin: 30px;
+  margin-left: 120px;
+  margin-right: 120px;
+}
+.div-pequeño .divH {
+  margin: 20px;
+  justify-content: flex-start;
+}
+
+.derecha {
+  margin-right: 900px;
+}
+
+.derecha .divH {
+  justify-content: flex-start;
+  text-align: right;
+  align-items: center;
+}
+
+.ai-cen {
+  align-items: center;
+  text-align: center;
+}
+
+.cantidad {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0px;
+}
+
+.concepto {
+  font-size: 25px;
+  margin: 0px;
+}
+
+.estadisticaAzul,
+.estadisticaAmarilla {
+  border-radius: 25px;
+  text-align: center;
+  padding: 20px;
+  margin: 25px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.estadisticaAzul {
+  width: 30%;
+  background-color: #e2f1ff;
+}
+
+.estadisticaAmarilla {
+  width: 30%;
+  background-color: #fff5e2;
+}
+
+.estadisticaVertical {
+  width: 70%;
+}
+
+.centroAbsoluto {
+  margin-top: 170px;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.error {
+  color: rgb(149, 83, 83);
+  font-size: 20px;
+  margin-bottom: 30px;
+}

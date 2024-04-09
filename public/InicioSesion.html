@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Sesión</title>
+    <link rel="stylesheet" href="general.css">   
+</head>
+<body>
+    <a href="index.html">
+        <img class="image5" src="Assets/atras.png"/>
+    </a>
+    <h2>Inicia sesión</h1>
+    <form class="ddiv" onsubmit="categorizarUsuario(event)"> 
+        <p class="izq">Usuario</p>
+        <input placeholder="escribe 'usuario' o 'administrador' aquí" id="usuario"/>
+        <p class="izq">Contraseña</p>
+        <input type="password" placeholder="lo que quieras..." type="password" class="inputt"/>
+        <p class="error" id="error"></p>
+        <button type="submit" class="boton3">Ingresar</button>
+        <img class="image2" src="Assets/palanca.png"/>
+    </form>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>
