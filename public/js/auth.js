@@ -1,8 +1,24 @@
+document.addEventListener("DOMContentLoaded", function () {
+  const token = localStorage.getItem("auth-token");
+  const id = token;
+  if (token) {
+    window.location.href = "Juegos.html";
+  }
+});
 async function categorizarUsuario(event) {
   event.preventDefault();
   const usuario = document.getElementById("usuario").value;
   const password = document.querySelector('input[type="password"]').value;
-  console.log(usuario, password);
+  if (usuario === "" || password === "") {
+    document.getElementById("error").innerText =
+      "Por favor, llena todos los campos";
+    return;
+  }
+
+  if (!validarCorreo(usuario)) {
+    document.getElementById("error").innerText = "Correo inválido";
+    return;
+  }
 
   const response = await fetch("http://localhost:3001/login", {
     method: "POST",
@@ -14,16 +30,17 @@ async function categorizarUsuario(event) {
       contraseña: password,
     }),
   });
-  console.log("response", response);
   const data = await response.json();
   if (data.error) {
     document.getElementById("error").innerText = data.error;
+  } else if (data.role == 0) {
+    localStorage.setItem("auth-token", data.token);
+    window.location.href = "Juegos.html";
+  } else if (data.role == 1) {
+    localStorage.setItem("auth-token", data.token);
+    window.location.href = "Estadisticas.html";
   } else {
-    if (data.role == "usuario") {
-      window.location.href = "Juegos.html";
-    } else if (data.role) {
-      window.location.href = "Estadisticas.html";
-    }
+    document.getElementById("error").innerText = data.message;
   }
 }
 
@@ -62,18 +79,6 @@ async function crearUsuario(event) {
   const apellido_paterno = document.getElementById("apellido_paterno").value;
   const fecha_registro = formatCurrentDate();
 
-  console.log(
-    nombre,
-    email,
-    contraseña,
-    telefono,
-    estado,
-    ciudad,
-    apellido_materno,
-    apellido_paterno,
-    fecha_registro
-  );
-
   const nuevoUsuario = {
     nombre: nombre,
     email: email,
@@ -95,6 +100,6 @@ async function crearUsuario(event) {
 
   const data = await response.json();
   if (data.success) {
-    window.location.href = "Perfil.html";
+    window.location.href = "InicioSesion.html";
   }
 }

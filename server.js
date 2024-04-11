@@ -3,6 +3,8 @@
 const express = require("express");
 const mysql = require("mysql2");
 const path = require("path");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const app = express();
@@ -32,10 +34,26 @@ app.get("/", (req, res) => {
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use((err, req, res, next) => {
   console.error("Error:", err);
   res.status(500).send("Ocurrió un error en el servidor");
+});
+
+function authenticateToken(req, res, next) {
+  const token = req.cookies["auth-token"];
+  if (!token) return res.sendStatus(403);
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
+}
+
+app.get("/protected", authenticateToken, (req, res) => {
+  res.json({ message: "Acceso permitido" });
 });
 
 // (GET) Endpoint para obtener datos de la base de datos
@@ -53,7 +71,7 @@ app.get("/datos", (req, res, next) => {
 app.post("/login", (req, res) => {
   const { usuario, contraseña } = req.body;
 
-  const query = `SELECT * FROM Usuario WHERE email = '${usuario}'  AND contraseña = '${contraseña}'`;
+  const query = `SELECT * FROM Usuario WHERE email = ?  AND contraseña = ?`;
 
   connection.query(query, [usuario, contraseña], (error, results) => {
     if (error) {
@@ -63,12 +81,20 @@ app.post("/login", (req, res) => {
         .json({ error: "Error en el servidor al intentar iniciar sesión" });
     }
     if (results.length > 0) {
+      const user = results[0];
+      const token = jwt.sign(
+        { userId: user.usuario_id },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "24h",
+        }
+      );
+      res.cookie("auth-token", token, { httpOnly: true, sameSite: "strict" });
       console.log("Inicio de sesión exitoso para:", usuario);
-      console.log(results);
       res.status(200).json({
         success: true,
         message: "Inicio de sesión exitoso",
-        role: "usuario",
+        role: results[0].esAdmin,
       });
     } else {
       console.log("Credenciales inválidas para:", usuario);
@@ -92,41 +118,52 @@ app.post("/signin", (req, res) => {
     fecha_registro,
   } = req.body;
 
-  const query = `INSERT INTO Usuario (email, telefono, estado, ciudad, contraseña, nombre, apellido_materno, apellido_paterno, fecha_registro, administrador_id) VALUES ('${email}', ${telefono}, '${estado}', '${ciudad}', '${password}', '${nombre}', '${apellido_materno}', '${apellido_paterno}', '${fecha_registro}', 1);`;
-
-  connection.query(query, (error, results) => {
-    if (error) {
-      console.error("Error al ejecutar la consulta de registro:", error);
-      return res
-        .status(500)
-        .json({ error: "Error en el servidor al intentar registrarse" });
-    }
-    console.log("Usuario registrado exitosamente:", email);
-    res.status(200).json({
-      success: true,
-      message: "Usuario registrado exitosamente",
-    });
-  });
-});
-
-app.get("/usuarios", (req, res) => {
-  const nuevoUsuario = req.body;
+  const query = `INSERT INTO Usuario (email, telefono, estado, ciudad, contraseña, nombre, apellido_materno, apellido_paterno, fecha_registro, esAdmin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, false);`;
 
   connection.query(
-    "INSERT INTO Usuario SET ?",
-    nuevoUsuario,
-    (error, results, fields) => {
+    query,
+    [
+      email,
+      telefono,
+      estado,
+      ciudad,
+      password,
+      nombre,
+      apellido_materno,
+      apellido_paterno,
+      fecha_registro,
+    ],
+    (error, results) => {
       if (error) {
-        console.error("Error al ejecutar la consulta:", error);
-        res.status(500).json({ error: "Error al crear el usuario" });
-        return;
+        console.error("Error al ejecutar la consulta de registro:", error);
+        return res
+          .status(500)
+          .json({ error: "Error en el servidor al intentar registrarse" });
       }
-      console.log("Nuevo usuario creado:", results);
-      res.status(201).json({
-        message: "Usuario creado exitosamente",
-        usuario: nuevoUsuario,
-        role: "usuario",
+      console.log("Usuario registrado exitosamente:", email);
+      res.status(200).json({
+        success: true,
+        message: "Usuario registrado exitosamente",
       });
+    }
+  );
+});
+
+app.get("/user-info", authenticateToken, (req, res) => {
+  const userId = req.user.userId;
+  connection.query(
+    "SELECT nombre, email FROM Usuario WHERE usuario_id = ?",
+    [userId],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "Error del servidor" });
+      }
+      if (results.length > 0) {
+        const { nombre, email } = results[0];
+        res.json({ nombre, email });
+      } else {
+        res.status(404).json({ message: "Usuario no encontrado" });
+      }
     }
   );
 });

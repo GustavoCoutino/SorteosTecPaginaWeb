@@ -52,7 +52,9 @@ a {
 
 input,
 .input,
-.inputt {
+.inputt,
+.name-input,
+.email-input {
   background-color: #d3e6f9;
   border-radius: 37px;
   padding: 15px;
