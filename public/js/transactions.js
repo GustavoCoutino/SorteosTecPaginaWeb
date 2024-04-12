@@ -21,21 +21,23 @@ async function fetchTransacciones() {
     }
     const data = await response.json();
     const container = document.querySelector(".div-pequeño");
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.compras.length; i++) {
       const div = document.createElement("div");
       div.className = "divH";
       const innerDiv = document.createElement("div");
       const p1 = document.createElement("p");
       p1.className = "p1";
-      p1.textContent = data[i].producto + ": " + data[i].costo;
+      p1.textContent = data.compras[i].producto + ": " + data.compras[i].costo;
       const p2 = document.createElement("p");
       p2.className = "p2";
-      p2.textContent = fechaFormato(data[i].fecha);
+      p2.textContent = fechaFormato(data.compras[i].fecha);
       innerDiv.appendChild(p1);
       innerDiv.appendChild(p2);
       div.appendChild(innerDiv);
       container.appendChild(div);
     }
+    const total = document.querySelector("#total-compras");
+    total.textContent = data.total;
   } catch (error) {
     console.error("Error:", error);
   }

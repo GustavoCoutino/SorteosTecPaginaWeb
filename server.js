@@ -70,6 +70,26 @@ app.get("/es-admin", authenticateToken, (req, res) => {
   );
 });
 
+app.get("/saldo-total", authenticateToken, (req, res) => {
+  const id = req.user.userId;
+  connection.query(
+    "CALL SorteosTec.GetSaldoByUsuarioId(?);",
+    [id],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "Error del servidor" });
+      }
+      if (results.length > 0) {
+        console.log(results);
+        const saldo = results[0][0].saldo;
+        res.json({ saldo: saldo });
+      } else {
+        res.status(404).json({ message: "Usuario no encontrado" });
+      }
+    }
+  );
+});
+
 app.post("/login", (req, res) => {
   const { usuario, contraseña } = req.body;
 
@@ -88,7 +108,7 @@ app.post("/login", (req, res) => {
         { userId: user.usuario_id, role: user.esAdmin },
         process.env.JWT_SECRET,
         {
-          expiresIn: "24h",
+          expiresIn: "1h",
         }
       );
       res.cookie("auth-token", token, { httpOnly: true, sameSite: "strict" });
@@ -180,7 +200,7 @@ app.get("/wallet-info", authenticateToken, (req, res) => {
         return res.status(500).json({ message: "Error del servidor" });
       }
       if (results.length > 0) {
-        res.json(results[0]);
+        res.json({ compras: results[0], total: results[1][0].Total });
       } else {
         res.status(404).json({ message: "Usuario no encontrado" });
       }
