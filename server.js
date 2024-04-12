@@ -52,20 +52,22 @@ function authenticateToken(req, res, next) {
   });
 }
 
-app.get("/protected", authenticateToken, (req, res) => {
-  res.json({ message: "Acceso permitido" });
-});
-
-// (GET) Endpoint para obtener datos de la base de datos
-app.get("/datos", (req, res, next) => {
-  connection.query("SELECT * FROM Usuario", (error, results, fields) => {
-    if (error) {
-      console.error("Error al ejecutar la consulta:", error);
-      return next(error);
+app.get("/es-admin", authenticateToken, (req, res) => {
+  const id = req.user.userId;
+  connection.query(
+    "SELECT esAdmin FROM Usuario WHERE usuario_id = ?",
+    [id],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "Error del servidor" });
+      }
+      if (results.length > 0) {
+        res.json({ esAdmin: results[0].esAdmin });
+      } else {
+        res.status(404).json({ message: "Usuario no encontrado" });
+      }
     }
-    console.log("Resultados de la consulta:", results);
-    res.json(results);
-  });
+  );
 });
 
 app.post("/login", (req, res) => {
@@ -83,7 +85,7 @@ app.post("/login", (req, res) => {
     if (results.length > 0) {
       const user = results[0];
       const token = jwt.sign(
-        { userId: user.usuario_id },
+        { userId: user.usuario_id, role: user.esAdmin },
         process.env.JWT_SECRET,
         {
           expiresIn: "24h",

@@ -1,10 +1,25 @@
 document.addEventListener("DOMContentLoaded", function () {
   const token = localStorage.getItem("auth-token");
-  const id = token;
   if (token) {
-    window.location.href = "Juegos.html";
+    identificarRol(token);
   }
 });
+
+async function identificarRol(token) {
+  const response = await fetch("http://localhost:3001/es-admin", {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+  const data = await response.json();
+  if (data.esAdmin) {
+    window.location.href = "Estadisticas.html";
+  } else {
+    window.location.href = "Juegos.html";
+  }
+}
+
 async function categorizarUsuario(event) {
   event.preventDefault();
   const usuario = document.getElementById("usuario").value;
