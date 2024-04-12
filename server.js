@@ -168,6 +168,24 @@ app.get("/user-info", authenticateToken, (req, res) => {
   );
 });
 
+app.get("/wallet-info", authenticateToken, (req, res) => {
+  const userId = req.user.userId;
+  connection.query(
+    "CALL SorteosTec.GetComprasByUsuarioId(?);",
+    [userId],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "Error del servidor" });
+      }
+      if (results.length > 0) {
+        res.json(results[0]);
+      } else {
+        res.status(404).json({ message: "Usuario no encontrado" });
+      }
+    }
+  );
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Servidor backend escuchando en el puerto ${PORT}`);
