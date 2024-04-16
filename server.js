@@ -218,7 +218,7 @@ app.get("/payment-data", authenticateToken, (req, res) => {
         return res.status(500).json({ message: "Error del servidor" });
       }
       if (results.length > 0) {
-        const { saldo } = results[1][0];
+        const { saldo } = results[1][0] ? results[1][0] : { saldo: 0 };
         res.json({
           cuentas: results[0],
           saldo: saldo,
