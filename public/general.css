@@ -104,7 +104,7 @@ input,
 }
 
 .boton1,
-.boton2 {
+.boton2, .botonE {
   border-radius: 13px;
   padding-left: 40px;
   padding-right: 40px;
@@ -117,6 +117,10 @@ input,
 
 .boton2 {
   background-color: #5f76c0;
+}
+
+.botonE {
+  background-color: rgb(235, 131, 131);
 }
 
 .boton3 {

@@ -23,7 +23,11 @@ async function fetchCards() {
     <div class="ai-cen">
       <p class="p1">Cuenta ${data.cuentas[i].banco}</p>
       <p class="p2">${hideCardNumber(data.cuentas[i].num_tarjeta)}</p>
-    </div>`;
+    </div>
+    <div class="ai-cen">
+      <a class="botonE">Eliminar</a>
+    </div>
+    `;
     divExterior.appendChild(divInterior);
   }
 }
