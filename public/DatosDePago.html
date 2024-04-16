@@ -15,6 +15,29 @@
         <p style="margin: 0px">Wallet</p>
       </div>
     </div>
+    <div class="div-pequeño" id="miContenedor" style="display:none;">
+      <form onsubmit="crearUsuario(event)">
+          <div class="divH">
+              <div class="divIn">
+                  <p class="izq">Numero de tarjeta</p>
+                  <input placeholder="" class="doblefila" type="number" id="numeroTarjeta" name="numeroTarjeta"/>
+              </div>
+          </div>
+          <div class="divH">
+              <div class="divIn">
+                  <p class="izq">Fecha de expiración</p>
+                  <input placeholder="0410" class="doblefila" type="number" id="fechaExpiracion" name="fechaExpiracion"/>
+              </div>
+              <div class="divIn">
+                  <p class="izq">CVV</p>
+                  <input placeholder="" class="doblefila" type="number" id="cvvTarjeta" name="cvvTarjeta"/>
+              </div>
+          </div>
+          <br/>
+          <button class="boton3" type="submit">Ingresar</button>
+          <button class="boton3" id="cerrarBoton">Cancelar</button>
+      </form>
+    </div>
     <div class="div-content">
       <img src="Assets/walletBillete.png" class="image4" />
       <div class="izquierdaEspaciador">
@@ -34,4 +57,15 @@
     </div>
     <script src="js/bankCard.js"></script>
   </body>
+  <script>
+    document.getElementById("mostrarBoton").addEventListener("click", function() {
+      var contenedor = document.getElementById("miContenedor");
+      contenedor.style.display = "block"; // Cambia la propiedad de visualización a "block" para mostrar el contenedor
+    });
+
+    document.getElementById("cerrarBoton").addEventListener("click", function() {
+    var contenedor = document.getElementById("miContenedor");
+    contenedor.style.display = "none"; // Cambia la propiedad de visualización a "none" para ocultar el contenedor
+  });
+  </script>
 </html>
