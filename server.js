@@ -70,10 +70,10 @@ app.get("/es-admin", authenticateToken, (req, res) => {
   );
 });
 
-app.get("/saldo-total", authenticateToken, (req, res) => {
+app.get("/monedas-totales", authenticateToken, (req, res) => {
   const id = req.user.userId;
   connection.query(
-    "CALL SorteosTec.GetSaldoByUsuarioId(?);",
+    "CALL SorteosTec.GetSaldoMonedasByUsuarioId(?);",
     [id],
     (error, results) => {
       if (error) {
@@ -81,8 +81,8 @@ app.get("/saldo-total", authenticateToken, (req, res) => {
       }
       if (results.length > 0) {
         console.log(results);
-        const saldo = results[0][0].saldo;
-        res.json({ saldo: saldo });
+        const monedas = results[0][0].monedas;
+        res.json({ monedas: monedas });
       } else {
         res.status(404).json({ message: "Usuario no encontrado" });
       }
@@ -140,7 +140,7 @@ app.post("/signin", (req, res) => {
     fecha_registro,
   } = req.body;
 
-  const query = `INSERT INTO Usuario (email, telefono, estado, ciudad, contraseña, nombre, apellido_materno, apellido_paterno, fecha_registro, esAdmin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, false);`;
+  const query = `CALL CreateCuentaAndWallet(?, ?, ?, ?, ?, ?, ?, ?, ?);`;
 
   connection.query(
     query,
@@ -201,6 +201,28 @@ app.get("/wallet-info", authenticateToken, (req, res) => {
       }
       if (results.length > 0) {
         res.json({ compras: results[0], total: results[1][0].Total });
+      } else {
+        res.status(404).json({ message: "Usuario no encontrado" });
+      }
+    }
+  );
+});
+
+app.get("/payment-data", authenticateToken, (req, res) => {
+  const userId = req.user.userId;
+  connection.query(
+    "CALL SorteosTec.GetTarjetasAndSaldoByUsuarioId(?)",
+    [userId],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "Error del servidor" });
+      }
+      if (results.length > 0) {
+        const { saldo } = results[1][0];
+        res.json({
+          cuentas: results[0],
+          saldo: saldo,
+        });
       } else {
         res.status(404).json({ message: "Usuario no encontrado" });
       }

@@ -1,6 +1,6 @@
 async function fetchSaldo() {
   try {
-    const response = await fetch("/saldo-total", {
+    const response = await fetch("/monedas-totales", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("auth-token"),
@@ -13,8 +13,12 @@ async function fetchSaldo() {
       );
     }
     const data = await response.json();
-    const saldo = document.querySelector("#cantidad-monedas");
-    saldo.textContent = data.saldo;
+    const monedas = document.querySelector("#cantidad-monedas");
+    if (data.monedas === null) {
+      monedas.textContent = "0";
+    } else {
+      monedas.textContent = data.monedas;
+    }
   } catch (error) {
     console.error("Error:", error);
   }

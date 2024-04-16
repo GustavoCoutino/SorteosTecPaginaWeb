@@ -21,6 +21,15 @@ async function fetchTransacciones() {
     }
     const data = await response.json();
     const container = document.querySelector(".div-pequeño");
+    const total = document.querySelector("#total-compras");
+    if (data.compras.length === 0) {
+      total.textContent = "0";
+      const p = document.createElement("p");
+      p.textContent = "No tienes compras aún";
+      container.appendChild(p);
+    } else {
+      total.textContent = data.total;
+    }
     for (let i = 0; i < data.compras.length; i++) {
       const div = document.createElement("div");
       div.className = "divH";
@@ -36,8 +45,6 @@ async function fetchTransacciones() {
       div.appendChild(innerDiv);
       container.appendChild(div);
     }
-    const total = document.querySelector("#total-compras");
-    total.textContent = data.total;
   } catch (error) {
     console.error("Error:", error);
   }
