@@ -230,6 +230,27 @@ app.get("/payment-data", authenticateToken, (req, res) => {
   );
 });
 
+app.get("/game-info", (req, res) => {
+  const userId = req.body.userId;
+  const gameName = req.body.gameName;
+  connection.query(
+    "CALL SorteosTec.GetGameDataByUsuarioIdAndGameName(?, ?)",
+    [userId, gameName],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "Error del servidor" });
+      }
+      if (results.length > 0) {
+        res.json({ sorteos: results[0] });
+      } else {
+        res
+          .status(404)
+          .json({ message: "No se pudo obtener la informacion del juego" });
+      }
+    }
+  );
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Servidor backend escuchando en el puerto ${PORT}`);
