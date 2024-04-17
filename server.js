@@ -230,7 +230,7 @@ app.get("/payment-data", authenticateToken, (req, res) => {
   );
 });
 
-app.get("/game-info", (req, res) => {
+app.post("/game-info", (req, res) => {
   const userId = req.body.userId;
   const gameName = req.body.gameName;
   connection.query(
@@ -241,7 +241,7 @@ app.get("/game-info", (req, res) => {
         return res.status(500).json({ message: "Error del servidor" });
       }
       if (results.length > 0) {
-        res.json({ sorteos: results[0] });
+        res.json({ game: results[0] });
       } else {
         res
           .status(404)
