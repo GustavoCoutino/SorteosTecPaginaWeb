@@ -80,7 +80,6 @@ app.get("/monedas-totales", authenticateToken, (req, res) => {
         return res.status(500).json({ message: "Error del servidor" });
       }
       if (results.length > 0) {
-        console.log(results);
         const monedas = results[0][0].monedas;
         res.json({ monedas: monedas });
       } else {
@@ -226,6 +225,36 @@ app.get("/payment-data", authenticateToken, (req, res) => {
       } else {
         res.status(404).json({ message: "Usuario no encontrado" });
       }
+    }
+  );
+});
+
+app.post("/add-card", authenticateToken, (req, res) => {
+  const userId = req.user.userId;
+  const { numero, tipo, cvv, banco } = req.body;
+  connection.query(
+    "CALL SorteosTec.CreateTarjeta(?, ?, ?, ?, ?)",
+    [userId, numero, tipo, cvv, banco],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "Error del servidor" });
+      }
+      res.json({ success: true, message: "Tarjeta agregada exitosamente" });
+    }
+  );
+});
+
+app.post("/delete-card", authenticateToken, (req, res) => {
+  const userId = req.user.userId;
+  const numero = req.body.numero;
+  connection.query(
+    "CALL SorteosTec.DeleteTarjeta(?, ?)",
+    [userId, numero],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "Error del servidor" });
+      }
+      res.json({ success: true, message: "Tarjeta eliminada exitosamente" });
     }
   );
 });
