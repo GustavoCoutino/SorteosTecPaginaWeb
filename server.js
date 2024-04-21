@@ -280,6 +280,69 @@ app.post("/game-info", (req, res) => {
   );
 });
 
+app.post("/update-coins", (req, res) => {
+  const userId = req.body.userId;
+  const gameName = req.body.gameName;
+  const coins = req.body.coins;
+  connection.query(
+    "CALL SorteosTec.ActualizarMonedas(?, ?, ?)",
+    [userId, coins, gameName],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "Error del servidor" });
+      }
+      res.json({ success: true, message: "Monedas actualizadas exitosamente" });
+    }
+  );
+});
+
+app.post("/update-highscore", (req, res) => {
+  const userId = req.body.userId;
+  const gameName = req.body.gameName;
+  const score = req.body.score;
+  connection.query(
+    "CALL SorteosTec.ActualizarPuntacion(?, ?, ?)",
+    [userId, score, gameName],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "Error del servidor" });
+      }
+      res.json({ success: true, message: "Monedas actualizadas exitosamente" });
+    }
+  );
+});
+
+app.post("/register-action", authenticateToken, (req, res) => {
+  const userId = req.user.userId;
+  const action = req.body.action;
+  const date = req.body.date;
+  connection.query(
+    "CALL SorteosTec.CrearConexion(?, ?, ?)",
+    [userId, date, action],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "Error del servidor" });
+      }
+      res.json({ success: true, message: "Accion registrada exitosamente" });
+    }
+  );
+});
+
+app.post("/update-saldo", authenticateToken, (req, res) => {
+  const userId = req.user.userId;
+  const saldo = req.body.saldo;
+  connection.query(
+    "CALL SorteosTec.UpdateSaldo(?, ?)",
+    [userId, saldo],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "Error del servidor" });
+      }
+      res.json({ success: true, message: "Saldo actualizado exitosamente" });
+    }
+  );
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Servidor backend escuchando en el puerto ${PORT}`);
