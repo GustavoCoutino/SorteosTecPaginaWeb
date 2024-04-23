@@ -1,53 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wallet</title>
-    <link rel="stylesheet" href="general.css">   
-</head>
-<body>
-    <div class="derecha">
-        <div class="divH">
-            <a href="Juegos.html" class="pointer">
-                <img src="Assets/atras.png" class="imageLogo">
-            </a>
-            <p style="margin: 0px;">Wallet</p>
-        </div>
+    <link rel="stylesheet" href="estilos.css" />
+  </head>
+  <body>
+    <a href="https://www.sorteostec.org">
+      <img class="leyendaSorteos" src="Assets/leyendaSorteos.png" />
+    </a>
+    <a href="Juegos.html">
+      <img src="Assets/atras.png" class="menu1" />
+    </a>
+    <a class="botonG" onclick="logout()">Sign out</a>
+    <p class="TTitulo">Wallet</p>
+    <br />
+    <div class="div_centrado">
+      <div class="div_horizontal">
+        <a href="Compras.html" class="tnone">
+          <div class="div_grisT">
+            <img class="imageMed" src="Assets/walletCanasta.png" />
+            <p class="pp">Compras</p>
+          </div>
+        </a>
+        <a href="DatosDePago.html" class="tnone">
+          <div class="div_grisT">
+            <img class="imageMed" src="Assets/walletBillete.png" />
+            <p class="pp">Datos de pago</p>
+          </div>
+        </a>
+        <a href="Monedas.html" class="tnone">
+          <div class="div_grisT">
+            <img class="imageMed" src="Assets/walletMoneda.png" />
+            <p class="pp">Monedas</p>
+          </div>
+        </a>
+      </div>
     </div>
-    <br/>
-    <div class="divH">
-        <h2>Wallet</h2>
-    </div>
-    <div class="divH">
-        <div>
-            <a href="Compras.html">
-            <div class="div"> 
-                <img src="Assets/walletCanasta.png" class="image3">
-            </div>
-            </a>
-            <p class="pcentro">Compras</p>
-        </div>
-    
-        <div>
-            <a href="DatosDePago.html">
-            <div class="div"> 
-                <img src="Assets/walletBillete.png" class="image3">
-            </div>
-            </a>
-            <p class="pcentro">Datos de pago</p>
-        </div>
-    
-        <div>
-            <a href="Monedas.html">
-            <div class="div"> 
-                <img src="Assets/walletMoneda.png" class="image3">
-            </div>
-            </a>
-            <p class="pcentro">Monedas</p>
-        </div>
-
-    </div>
-    
-</body>
+  </body>
+  <script src="js/logout.js"></script>
 </html>

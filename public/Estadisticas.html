@@ -4,45 +4,54 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Estadisticas</title>
-    <link rel="stylesheet" href="general.css" />
+    <link rel="stylesheet" href="estilos.css" />
   </head>
   <body>
-    <a href="index.html">
-      <img src="Assets/SorteosLogo.png" class="image6" />
+    <a href="https://www.sorteostec.org">
+      <img class="leyendaSorteos" src="Assets/leyendaSorteos.png" />
     </a>
-    <a class="boton1" onclick="logout()">Sign out</a>
-    <div class="divH">
-      <h2>Estadisticas</h2>
+    <a class="botonG" onclick="logout()">Sign out</a>
+    <div class="div_menu"></div>
+    <a href="AgregarUsuario.html">
+      <img src="Assets/perfil.png" class="menu1" />
+    </a>
+
+    <p class="TNormalGrandeCentro">Bienvenido</p>
+    <div class="nombreUsuario">Administrador</div>
+    <div class="div_espaciador">
+      <p class="centro">¿Qué te gustaría analizar hoy?</p>
     </div>
     <br />
-    <div class="divH">
-      <div>
-        <a href="EstadisticasPorJuego.html">
-          <div class="div">
-            <img src="Assets/escudoVerde.png" class="image3" />
-          </div>
-        </a>
-        <p class="pcentro">GameTec</p>
-      </div>
+    <div class="div_centrado">
+      <div class="div_horizontal">
+        <div>
+          <a href="EstadisticasPorJuego.html" class="tnone">
+            <div class="cuadro_v">
+              <p class="nomjuego_v">GameTec</p>
+              <img src="Assets/escudoVerde.png" class="juego" />
+            </div>
+          </a>
+        </div>
 
-      <div>
-        <a href="EstadisticasPorJuego2.html">
-          <div class="div">
-            <img src="Assets/escudoAzul.png" class="image3" />
-          </div>
-        </a>
-        <p class="pcentro">Defentec</p>
-      </div>
+        <div>
+          <a href="EstadisticasPorJuego2.html" class="tnone">
+            <div class="cuadro_g">
+              <p class="nomjuego_g">DefenTec</p>
+              <img src="Assets/escudoAzul.png" class="juego" />
+            </div>
+          </a>
+        </div>
 
-      <div>
-        <a href="EstadisticasPorJuego3.html">
-          <div class="div">
-            <img src="Assets/escudoPared.png" class="image3" />
-          </div>
-        </a>
-        <p class="pcentro">LanzaTec</p>
+        <div>
+          <a href="EstadisticasPorJuego2.html" class="tnone">
+            <div class="cuadro_a">
+              <p class="nomjuego_a">LanzaTec</p>
+              <img src="Assets/escudoPared.png" class="juego" />
+            </div>
+          </a>
+        </div>
       </div>
     </div>
-    <script src="js/logout.js"></script>
   </body>
+  <script src="js/logout.js"></script>
 </html>

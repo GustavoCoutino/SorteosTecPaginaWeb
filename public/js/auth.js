@@ -23,7 +23,7 @@ async function identificarRol(token) {
 async function categorizarUsuario(event) {
   event.preventDefault();
   const usuario = document.getElementById("usuario").value;
-  const password = document.querySelector('input[type="password"]').value;
+  const password = document.getElementById("password").value;
   if (usuario === "" || password === "") {
     document.getElementById("error").innerText =
       "Por favor, llena todos los campos";
@@ -48,7 +48,7 @@ async function categorizarUsuario(event) {
   const data = await response.json();
   if (data.error) {
     document.getElementById("error").innerText = data.error;
-  } else if (data.role == 0) {
+  } else if (data.role === 0) {
     localStorage.setItem("auth-token", data.token);
     window.location.href = "Juegos.html";
   } else if (data.role == 1) {

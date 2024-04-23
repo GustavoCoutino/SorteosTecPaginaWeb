@@ -52,3 +52,62 @@ async function crearUsuario(event) {
     window.location.href = "InicioSesion.html";
   }
 }
+
+function togglePasswordVisibility() {
+  const passwordInput = document.getElementById("contraseña");
+  const toggleIcon = document.getElementById("togglePassword");
+
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    toggleIcon.classList.remove("fa-eye");
+    toggleIcon.classList.add("fa-eye-slash");
+  } else {
+    passwordInput.type = "password";
+    toggleIcon.classList.remove("fa-eye-slash");
+    toggleIcon.classList.add("fa-eye");
+  }
+}
+
+var estadosMexico = [
+  "Aguascalientes",
+  "Baja California",
+  "Baja California Sur",
+  "Campeche",
+  "Chiapas",
+  "Chihuahua",
+  "Ciudad de México",
+  "Coahuila",
+  "Colima",
+  "Durango",
+  "Guanajuato",
+  "Guerrero",
+  "Hidalgo",
+  "Jalisco",
+  "Estado de México",
+  "Michoacán",
+  "Morelos",
+  "Nayarit",
+  "Nuevo León",
+  "Oaxaca",
+  "Puebla",
+  "Querétaro",
+  "Quintana Roo",
+  "San Luis Potosí",
+  "Sinaloa",
+  "Sonora",
+  "Tabasco",
+  "Tamaulipas",
+  "Tlaxcala",
+  "Veracruz",
+  "Yucatán",
+  "Zacatecas",
+];
+
+var selectEstado = document.getElementById("estado");
+
+estadosMexico.forEach(function (estado) {
+  var option = document.createElement("option");
+  option.value = estado;
+  option.text = estado;
+  selectEstado.appendChild(option);
+});

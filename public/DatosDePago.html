@@ -4,83 +4,137 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Datos de pago</title>
-    <link rel="stylesheet" href="general.css" />
+    <link rel="stylesheet" href="estilos.css" />
   </head>
   <body>
-    <div class="derecha">
-      <div class="divH">
-        <a href="Wallet.html" class="pointer">
-          <img src="Assets/atras.png" class="imageLogo" />
-        </a>
-        <p style="margin: 0px">Wallet</p>
+    <a href="https://www.sorteostec.org">
+      <img class="leyendaSorteos" src="Assets/leyendaSorteos.png" />
+    </a>
+    <a href="Wallet.html">
+      <img src="Assets/atras.png" class="menu1" />
+    </a>
+    <a class="botonG" onclick="logout()">Sign out</a>
+    <p class="TTitulo">Datos de pago</p>
+    <div class="div_esquina">
+      <div class="div_centrado">
+        <div class="div_grisInfoI">
+          <h3 id="saldo">0</h3>
+          <p class="t_info">Dinero actual</p>
+        </div>
+        <div class="mas_tarjeta">
+          <button class="invisible" id="mostrarCard">+</button>
+        </div>
       </div>
     </div>
-    <div class="div-pequeño" id="addCardContainer" style="display: none">
+
+    <div class="div_centrado">
+      <h3>Cuentas a transferir</h3>
+    </div>
+    <div class="div_espaciador">
+      <div class="div_centrado">
+        <div class="div-pequeño" id="cardListContainer"></div>
+      </div>
+    </div>
+    <div class="div_centrado">
+      <button class="botonN" id="mostrarBoton">Añadir</button>
+    </div>
+
+    <div id="confirmarEliminar" class="div-absolute" style="display: none">
+      <div class="confirmar-eliminar-contenido">
+        <h3 class="gris">¿Estás seguro de que deseas eliminar esta tarjeta?</h3>
+        <div class="div_espaciador">
+          <button class="botonAT" id="cancelarEliminar">Cancelar</button>
+          <button class="botonE" id="confirmarEliminarBtn">Eliminar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="div-absolute" id="addSaldo" style="display: none">
+      <h4 class="gris">Añadir una tarjeta</h4>
+      <form onsubmit="pendiente(event)">
+        <div class="div_tarjeta">
+          <div class="div_horizontal">
+            <div class="div_tarjeta">
+              <p class="TFormm">Saldo a agregar</p>
+              <input
+                placeholder=""
+                class="input_tarjetaG"
+                type="number"
+                id="numeroTarjeta"
+                name="numeroTarjeta"
+              />
+            </div>
+            <div class="div_tarjeta">
+              <p class="TFormm">CVV</p>
+              <input
+                placeholder=""
+                class="input_tarjetaP"
+                type="number"
+                id="cvv"
+                name="cvv"
+              />
+            </div>
+          </div>
+          <select>
+            <div class="div-pequeño" id="CardListPay"></div>
+          </select>
+        </div>
+        <button class="botonF" type="submit" onclick="crearCard(event)">
+          Ingresar
+        </button>
+        <button class="botonE" id="cerrarBoton">Cancelar</button>
+      </form>
+    </div>
+
+    <div class="div-absolute" id="addCardContainer" style="display: none">
+      <h4 class="gris">Añadir una tarjeta</h4>
       <form onsubmit="crearCard(event)">
-        <div class="divH">
-          <div class="divIn">
-            <p class="izq">Numero de tarjeta</p>
+        <div class="div_horizontal">
+          <div class="div_tarjeta">
+            <p class="TFormm">Numero de tarjeta</p>
             <input
               placeholder=""
-              class="doblefila"
+              class="input_tarjetaG"
               type="number"
               id="numeroTarjeta"
               name="numeroTarjeta"
             />
           </div>
-          <div class="divIn">
-            <p class="izq">Banco</p>
+          <div class="div_tarjeta">
+            <p class="TFormm">Banco</p>
             <input
               placeholder=""
-              class="doblefila"
+              class="input_tarjetaP"
               type="text"
               id="banco"
               name="banco"
             />
           </div>
         </div>
-        <div class="divH">
-          <div class="divIn">
-            <p class="izq">Tipo</p>
+        <div class="div_horizontal">
+          <div class="div_tarjeta">
+            <p class="TFormm">CVV</p>
             <input
               placeholder=""
-              class="doblefila"
-              type="text"
-              id="tipo"
-              name="tipo"
-            />
-          </div>
-          <div class="divIn">
-            <p class="izq">CVV</p>
-            <input
-              placeholder=""
-              class="doblefila"
+              class="input_tarjetaG"
               type="number"
               id="cvvTarjeta"
               name="cvvTarjeta"
             />
           </div>
+          <div class="div_tarjeta">
+            <p class="TFormm">Tipo</p>
+            <select class="input-tipo" id="tipo" name="tipo"></select>
+          </div>
         </div>
         <br />
-        <button class="boton3" type="submit">Ingresar</button>
-        <button class="boton3" id="cerrarBoton">Cancelar</button>
+        <button class="botonF" type="submit" onclick="crearCard(event)">
+          Ingresar
+        </button>
+        <button class="botonE" id="cerrarBoton">Cancelar</button>
       </form>
     </div>
-    <div class="div-content">
-      <img src="Assets/walletBillete.png" class="image4" />
-      <div class="izquierdaEspaciador">
-        <h2>Datos de pago</h2>
-      </div>
-      <div class="div">
-        <h3 id="saldo"></h3>
-        <p class="pcentro">Dinero Actual</p>
-      </div>
-      <div class="divH">
-        <p>Cuentas a transferir</p>
-        <button class="boton1" id="mostrarBoton">Agregar tarjeta</button>
-      </div>
-      <div class="div-pequeño" id="cardListContainer"></div>
-    </div>
+
     <script src="js/bankCard.js"></script>
   </body>
   <script>
@@ -95,6 +149,20 @@
       .getElementById("cerrarBoton")
       .addEventListener("click", function () {
         var contenedor = document.getElementById("addCardContainer");
+        contenedor.style.display = "none";
+      });
+
+    document
+      .getElementById("mostrarCard")
+      .addEventListener("click", function () {
+        var contenedor = document.getElementById("addSaldo");
+        contenedor.style.display = "block";
+      });
+
+    document
+      .getElementById("cerrarCard")
+      .addEventListener("click", function () {
+        var contenedor = document.getElementById("addSaldo");
         contenedor.style.display = "none";
       });
   </script>

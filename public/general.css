@@ -6,10 +6,14 @@ html {
 body {
   background-color: white;
   margin: 30px; /* POR EDITAR */
-  margin-left: 180px;
-  margin-right: 180px;
+  margin-left: 80px;
+  margin-right: 80px;
 }
 
+.padLef {
+  margin-left: 50px;
+  margin-bottom: 30px;
+}
 h1,
 h2,
 h3 {
@@ -40,7 +44,7 @@ h4 {
 
 p {
   font-size: 40px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 a {
@@ -84,12 +88,17 @@ input,
   border-radius: 20px;
   text-align: center;
   padding: 30px;
-  padding-left: 200px;
-  padding-right: 200px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .izq {
   text-align: left;
+}
+
+.espacio {
+  width: 200px;
+  height: 100px;
 }
 
 .ddiv-centrado {
@@ -104,8 +113,10 @@ input,
 }
 
 .boton1,
-.boton2, .botonE {
-  border-radius: 13px;
+.boton2,
+.botonE,
+.botonI {
+  border-radius: 37px;
   padding-left: 40px;
   padding-right: 40px;
   padding: 12px;
@@ -123,17 +134,24 @@ input,
   background-color: rgb(235, 131, 131);
 }
 
+.botonI {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 100px;
+  margin-right: 150px;
+  background-color: #3651a6;
+}
+
 .boton3 {
-  text-decoration: none;
-  color: white;
-  font-size: 25px;
-  margin-top: 70px;
   background-color: #233479;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 25px;
   padding: 12px;
   border-radius: 37px;
   padding-left: 20px;
   padding-right: 20px;
-  width: 100%;
 }
 
 .divH {
@@ -154,6 +172,10 @@ input,
 
 .div-content {
   margin-top: 50px;
+}
+
+.divCentro {
+  text-align: center;
 }
 
 .image1,
@@ -265,6 +287,14 @@ input,
   margin-left: 120px;
   margin-right: 120px;
 }
+
+.div-absolute {
+  position: absolute;
+  margin: 30px;
+  margin-left: 120px;
+  margin-right: 120px;
+}
+
 .div-pequeño .divH {
   margin: 20px;
   justify-content: flex-start;
@@ -336,4 +366,18 @@ input,
   color: rgb(149, 83, 83);
   font-size: 20px;
   margin-bottom: 30px;
+}
+.div-popup {
+  position: fixed;
+  align-self: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 400px;
+  background-color: #f1f1f1;
+  z-index: 9999;
+  text-align: center;
+  justify-content: center;
+  border-radius: 12px;
 }

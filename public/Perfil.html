@@ -1,34 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Perfil</title>
-    <link rel="stylesheet" href="general.css">   
-</head>
-<body>
-    <div class="izquierda">
-        <div class="divH">
-            <a href="Juegos.html" class="pointer">
-                <img src="Assets/atras.png" class="imageLogo">
-            </a>
+    <link rel="stylesheet" href="estilos.css" />
+  </head>
+  <body>
+    <a href="https://www.sorteostec.org">
+      <img class="leyendaSorteos" src="Assets/leyendaSorteos.png" />
+    </a>
+    <a href="Juegos.html">
+      <img src="Assets/atras.png" class="menu1" />
+    </a>
+    <a class="botonG" onclick="logout()">Sign out</a>
+    <p class="TTitulo">Perfil</p>
+    <div class="div_espaciadorBottomP">
+      <div class="centro">
+        <p>Nombre</p>
+        <div class="div_input">
+          <div class="name-input"></div>
         </div>
-    </div>
-    <div class="izquierda">
-        <div class="divH">
-            <img src="Assets/perfil.png" class="image3"/>
-            <div class="izquierdaEspacio">
-                <h2>Perfil</h1>
-            </div>
-        </div>
-    </div>
-    <div class="ddiv"> 
-        <p>Nombre completo</p>
-        <div class="name-input"></div>
         <p>Correo electrónico</p>
-        <div class="email-input"></div>
-        <br/>
+        <div class="div_input">
+          <div class="email-input"></div>
+        </div>
+      </div>
     </div>
-<script src="js/userInfo.js"></script>
-</body>
+    <div class="div_centrado">
+      <div class="div_horizontal">
+        <div class="cuadroA">
+          <p class="nomjuego_a">FronTec</p>
+          <img class="juegoEscudo" src="Assets/escudoAzul.png" />
+          <div class="progresoA"></div>
+        </div>
+        <div class="cuadroG">
+          <p class="nomjuego_g">Frontec</p>
+          <img class="juegoEscudo" src="Assets/escudoPared.png" />
+          <div class="progresoG"></div>
+        </div>
+        <div class="cuadroV">
+          <p class="nomjuego_v">FronTec</p>
+          <img class="juegoEscudo" src="Assets/escudoVerde.png" />
+          <div class="progresoV"></div>
+        </div>
+      </div>
+    </div>
+    <script src="js/logout.js"></script>
+    <script src="js/userInfo.js"></script>
+  </body>
 </html>

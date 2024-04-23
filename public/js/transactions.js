@@ -32,17 +32,47 @@ async function fetchTransacciones() {
     }
     for (let i = 0; i < data.compras.length; i++) {
       const div = document.createElement("div");
-      div.className = "divH";
-      const innerDiv = document.createElement("div");
+      div.className = "div_Gcompras";
+
+      const divHorizontal = document.createElement("div");
+      divHorizontal.className = "div_horizontal";
+
+      const divGrande = document.createElement("div");
+      divHorizontal.className = "div_compras";
+
+      const divNormal = document.createElement("div");
+      divNormal.className = "div_jus";
+
       const p1 = document.createElement("p");
-      p1.className = "p1";
+      p1.className = "pTitulo";
       p1.textContent = data.compras[i].producto + ": " + data.compras[i].costo;
+
       const p2 = document.createElement("p");
-      p2.className = "p2";
+      p2.className = "pFecha";
       p2.textContent = fechaFormato(data.compras[i].fecha);
-      innerDiv.appendChild(p1);
-      innerDiv.appendChild(p2);
-      div.appendChild(innerDiv);
+
+      const img = document.createElement("img");
+      img.className = "compra";
+
+      if (data.compras[i].producto.includes("Corre Teus")) {
+        img.src = "../Assets/escudoVerde.png";
+      } else if (data.compras[i].producto.includes("Lanza Tec")) {
+        img.src = "../Assets/escudoAzul.png";
+      } else if (data.compras[i].producto.includes("Tower Defense")) {
+        img.src = "../Assets/escudoPared.png";
+      } else {
+        img.src = "/public/Assets/maquina.png";
+      }
+
+      divNormal.appendChild(p1);
+      divNormal.appendChild(p2);
+
+      divHorizontal.appendChild(img);
+
+      divHorizontal.appendChild(divNormal);
+      divGrande.appendChild(divHorizontal);
+      div.appendChild(divGrande);
+
       container.appendChild(div);
     }
   } catch (error) {

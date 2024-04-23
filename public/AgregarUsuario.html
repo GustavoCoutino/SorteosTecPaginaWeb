@@ -12,16 +12,13 @@
     <a href="https://www.sorteostec.org">
         <img class="leyendaSorteos" src="Assets/leyendaSorteos.png">
     </a>
-    <a href="index.html">
+    <a href="Estadisticas.html">
         <img src="Assets/atras.png" class="menu1">
     </a>
     <div class="div_inicio">
     <p class="TSecundario">Crear nueva cuenta..</p>
     <div class="div_horizontal">
-        <p class="TTercero">¿Ya tienes una cuenta?</p>
-        <a class="alink" href="InicioSesion.html">
-        <p class="TTerceroAzul">Log in.</p>
-        </a>
+        <p class="TTercero">Solo por tener perfil de administrador puedes crear usuarios.</p>
     </div>
 
     <form id="formulario-usuario" onsubmit="crearUsuario(event)">
@@ -44,6 +41,7 @@
                 <div class="div_gris">
                     <p class="TForm">Estado</p>
                     <select class="input_forms" id="estado" name="estado">
+                        <!-- Las opciones de los estados se generarán aquí -->
                     </select>
                 </div>
 
@@ -75,7 +73,7 @@
             <br/>
             <p class="error" id="error"></p>
             <br/>
-            <button class="botonF" type="submit">Ingresar</button>
+            <button class="botonF" type="submit">Crear usuario</button>
             <img class="imageForm" src="Assets/escudoAzul.png"/>
     </form> 
 

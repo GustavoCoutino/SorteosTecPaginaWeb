@@ -4,28 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Compras</title>
-    <link rel="stylesheet" href="general.css" />
+    <link rel="stylesheet" href="estilos.css" />
   </head>
   <body>
-    <div class="derecha">
-      <div class="divH">
-        <a href="Wallet.html" class="pointer">
-          <img src="Assets/atras.png" class="imageLogo" />
-        </a>
-        <p style="margin: 0px">Wallet</p>
+    <a href="https://www.sorteostec.org">
+      <img class="leyendaSorteos" src="Assets/leyendaSorteos.png" />
+    </a>
+    <a href="Wallet.html">
+      <img src="Assets/atras.png" class="menu1" />
+    </a>
+    <a class="botonG" onclick="logout()">Sign out</a>
+    <p class="TTitulo">Compras</p>
+
+    <div class="div_centrado">
+      <div class="div_grisInfo">
+        <h3 id="total-compras">0</h3>
+        <p class="t_info">Valor total de las compras</p>
       </div>
     </div>
     <div class="div-content">
-      <img src="Assets/walletCanasta.png" class="image4" />
-      <div class="izquierdaEspaciador">
-        <h2>Compras</h2>
-      </div>
-      <div class="div">
-        <h3 id="total-compras">0</h3>
-        <p class="pcentro">Valor total de las compras</p>
-      </div>
+      <div class="div"></div>
       <div class="div-pequeño"></div>
     </div>
+    <script src="js/logout.js"></script>
     <script src="js/transactions.js"></script>
   </body>
 </html>

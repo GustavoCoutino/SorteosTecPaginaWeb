@@ -1,26 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inicio Sesión</title>
-    <link rel="stylesheet" href="general.css">   
-</head>
-<body>
-    <a href="index.html">
-        <img class="image5" src="Assets/atras.png"/>
+    <link rel="stylesheet" href="estilos.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
+    <a href="https://www.sorteostec.org">
+      <img class="leyendaSorteos" src="Assets/leyendaSorteos.png" />
     </a>
-    <h2>Inicia sesión</h1>
-    <form class="ddiv" onsubmit="categorizarUsuario(event)"> 
-        <p class="izq">Usuario</p>
-        <input placeholder="escribe 'usuario' o 'administrador' aquí" id="usuario"/>
-        <p class="izq">Contraseña</p>
-        <input type="password" placeholder="lo que quieras..." type="password" class="inputt"/>
+    <a href="index.html">
+      <img src="Assets/atras.png" class="menu1" />
+    </a>
+    <div class="div_inicio">
+      <p class="TSecundario">Inicio sesión.</p>
+      <div class="div_horizontal">
+        <p class="TTercero">¿No tienes una cuenta?</p>
+        <a class="alink" href="Registrate.html">
+          <p class="TTerceroAzul">Registrarme.</p>
+        </a>
+      </div>
+      <form class="ddiv" onsubmit="categorizarUsuario(event)">
+        <div class="div_horizontal">
+          <div class="div_gris">
+            <div class="div_tamañoIS">
+              <p class="TForm">Usuario</p>
+              <input
+                class="input_forms"
+                placeholder="correo@tec.mx"
+                id="usuario"
+              />
+            </div>
+          </div>
+
+          <div class="div_gris">
+            <div class="div_tamañoIS">
+              <div class="div_horizontal">
+                <div>
+                  <p class="TForm">Contraseña</p>
+                  <input class="input_forms" type="password" id="password" />
+                </div>
+                <i
+                  id="togglePassword"
+                  class="fas fa-eye password-icon"
+                  onclick="togglePasswordVisibility()"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
         <p class="error" id="error"></p>
-        <button type="submit" class="boton3">Ingresar</button>
-        <img class="image2" src="Assets/palanca.png"/>
-    </form>
+
+        <button type="submit" class="botonF">Ingresar</button>
+        <img class="imageForm" src="Assets/escudoVerde.png" />
+      </form>
+    </div>
 
     <script src="js/auth.js"></script>
-</body>
+  </body>
 </html>
