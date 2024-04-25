@@ -20,6 +20,7 @@ async function fetchTransacciones() {
       );
     }
     const data = await response.json();
+    console.log(data.compras.length);
     const container = document.querySelector(".div-pequeño");
     const total = document.querySelector("#total-compras");
     if (data.compras.length === 0) {

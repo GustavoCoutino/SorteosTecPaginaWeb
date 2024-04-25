@@ -275,6 +275,20 @@ app.post("/update-game-session", (req, res) => {
   );
 });
 
+app.get("/cargas-saldo", authenticateToken, (req, res) => {
+  const userId = req.user.userId;
+  connection.query(
+    "Call SorteosTec.GetCargasSaldo(?)",
+    [userId],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "Error del servidor" });
+      }
+      res.json({ cargas: results });
+    }
+  );
+});
+
 app.post("/update-saldo", authenticateToken, (req, res) => {
   const userId = req.user.userId;
   const { numeroTarjeta, fecha, saldoAgregado } = req.body;

@@ -2,6 +2,13 @@ function hideCardNumber(num_tarjeta) {
   return "**** **** **** " + String(num_tarjeta).slice(-4);
 }
 
+function fechaFormato(dateString) {
+  const date = new Date(dateString);
+  const options = { day: "numeric", month: "long", year: "numeric" };
+  const formattedDate = date.toLocaleDateString("es-ES", options);
+  return `Adquirido el ${formattedDate}`;
+}
+
 async function fetchCards() {
   const response = await fetch("/payment-data", {
     method: "GET",
@@ -61,6 +68,37 @@ async function fetchCards() {
     cardsContainer.appendChild(divInterior);
   }
 }
+
+async function getMovimientos() {
+  const response = await fetch("/cargas-saldo", {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("auth-token"),
+      "Content-Type": "application/json",
+    },
+  });
+  if (!response.ok) {
+    throw new Error("Hubo un error al obtener los datos de los movimientos");
+  }
+  const data = await response.json();
+  console.log(data.cargas[0]);
+  const divExterior = document.getElementById("movementsContainer");
+  for (let i = 0; i < data.cargas[0].length; i++) {
+    const divInterior = document.createElement("div");
+    const formattedElement = document.createElement("p");
+    formattedElement.textContent = `Saldo agregado: ${
+      data.cargas[0][i].saldoAgregado
+    } - Realizado el ${fechaFormato(
+      data.cargas[0][i].fecha
+    )} con la tarjeta ${hideCardNumber(data.cargas[0][i].numeroTarjeta)}`;
+    divInterior.appendChild(formattedElement);
+
+    divExterior.appendChild(divInterior);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", getMovimientos);
+
 async function agregarSaldo(event) {
   const selectedCardRadio = document.querySelector(
     'input[name="selectedCard"]:checked'
