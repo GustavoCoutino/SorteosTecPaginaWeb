@@ -58,7 +58,7 @@ async function fetchTransacciones() {
         img.src = "../Assets/escudoVerde.png";
       } else if (data.compras[i].producto.includes("Lanza Tec")) {
         img.src = "../Assets/escudoAzul.png";
-      } else if (data.compras[i].producto.includes("Tower Defense")) {
+      } else if (data.compras[i].producto.includes("End Game")) {
         img.src = "../Assets/escudoPared.png";
       } else {
         img.src = "/public/Assets/maquina.png";

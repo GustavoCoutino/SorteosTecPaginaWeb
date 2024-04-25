@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saldo</title>
+    <link rel="stylesheet" href="estilos.css" />
+  </head>
+  <body>
+    <a href="https://www.sorteostec.org">
+      <img class="leyendaSorteos" src="Assets/leyendaSorteos.png" />
+    </a>
+    <a href="DatosDePago.html">
+      <img src="Assets/atras.png" class="menu1" />
+    </a>
+    <a class="botonG" onclick="logout()">Sign out</a>
+    <p class="TTitulo">Saldo</p>
+    <div class="div_esquina">
+      <div class="div_centrado">
+        <div class="div_grisInfoI">
+          <h3 id="saldo">0</h3>
+          <p class="t_info">Dinero actual</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="div_centrado">
+      <h3>Cuentas a transferir</h3>
+    </div>
+    <div class="div_espaciador">
+      <div class="div_centrado"></div>
+    </div>
+    <div class="div_centrado">
+      <button class="botonN" id="mostrarBoton">Añadir</button>
+    </div>
+
+    <div id="confirmarEliminar" class="div-absolute" style="display: none">
+      <div class="confirmar-eliminar-contenido">
+        <h3 class="gris">¿Estás seguro de que deseas eliminar esta tarjeta?</h3>
+        <div class="div_espaciador">
+          <button class="botonAT" id="cancelarEliminar">Cancelar</button>
+          <button class="botonE" id="confirmarEliminarBtn">Eliminar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="div-absolute" id="addSaldo" style="display: none">
+      <h4 class="gris">Agregar saldo</h4>
+      <div class="div-pequeño" id="cardListContainer"></div>
+      <br />
+      <button
+        class="botonF"
+        type="button"
+        type="submit"
+        onclick="agregarSaldo(event)"
+      >
+        Agregar
+      </button>
+      <button class="botonE" type="button" id="cerrarBoton">Cancelar</button>
+    </div>
+
+    <script src="js/addSaldo.js"></script>
+    <script src="js/logout.js"></script>
+  </body>
+</html>

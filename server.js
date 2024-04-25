@@ -259,66 +259,13 @@ app.post("/delete-card", authenticateToken, (req, res) => {
   );
 });
 
-app.post("/game-info", (req, res) => {
-  const userId = req.body.userId;
-  const gameName = req.body.gameName;
+app.post("/update-game-session", (req, res) => {
+  const { puntaje, monedas, usuarioId, nombreJuego, tiempoJugado, fecha } =
+    req.body;
+  console.log(req.body);
   connection.query(
-    "CALL SorteosTec.GetGameDataByUsuarioIdAndGameName(?, ?)",
-    [userId, gameName],
-    (error, results) => {
-      if (error) {
-        return res.status(500).json({ message: "Error del servidor" });
-      }
-      if (results.length > 0) {
-        res.json({ game: results[0] });
-      } else {
-        res
-          .status(404)
-          .json({ message: "No se pudo obtener la informacion del juego" });
-      }
-    }
-  );
-});
-
-app.post("/update-coins", (req, res) => {
-  const userId = req.body.userId;
-  const gameName = req.body.gameName;
-  const coins = req.body.coins;
-  connection.query(
-    "CALL SorteosTec.ActualizarMonedas(?, ?, ?)",
-    [userId, coins, gameName],
-    (error, results) => {
-      if (error) {
-        return res.status(500).json({ message: "Error del servidor" });
-      }
-      res.json({ success: true, message: "Monedas actualizadas exitosamente" });
-    }
-  );
-});
-
-app.post("/update-highscore", (req, res) => {
-  const userId = req.body.userId;
-  const gameName = req.body.gameName;
-  const score = req.body.score;
-  connection.query(
-    "CALL SorteosTec.ActualizarPuntacion(?, ?, ?)",
-    [userId, score, gameName],
-    (error, results) => {
-      if (error) {
-        return res.status(500).json({ message: "Error del servidor" });
-      }
-      res.json({ success: true, message: "Monedas actualizadas exitosamente" });
-    }
-  );
-});
-
-app.post("/register-action", authenticateToken, (req, res) => {
-  const userId = req.user.userId;
-  const action = req.body.action;
-  const date = req.body.date;
-  connection.query(
-    "CALL SorteosTec.CrearConexion(?, ?, ?)",
-    [userId, date, action],
+    "CALL SorteosTec.CreateEstructura(?, ?, ?, ?, ?, ?)",
+    [puntaje, monedas, usuarioId, nombreJuego, tiempoJugado, fecha],
     (error, results) => {
       if (error) {
         return res.status(500).json({ message: "Error del servidor" });
@@ -330,10 +277,10 @@ app.post("/register-action", authenticateToken, (req, res) => {
 
 app.post("/update-saldo", authenticateToken, (req, res) => {
   const userId = req.user.userId;
-  const saldo = req.body.saldo;
+  const { numeroTarjeta, fecha, saldoAgregado } = req.body;
   connection.query(
-    "CALL SorteosTec.UpdateSaldo(?, ?)",
-    [userId, saldo],
+    "CALL SorteosTec.agregarSaldo(?, ?, ?, ?)",
+    [userId, numeroTarjeta, fecha, saldoAgregado],
     (error, results) => {
       if (error) {
         return res.status(500).json({ message: "Error del servidor" });

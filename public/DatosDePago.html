@@ -22,7 +22,13 @@
           <p class="t_info">Dinero actual</p>
         </div>
         <div class="mas_tarjeta">
-          <button class="invisible" id="mostrarCard">+</button>
+          <button
+            onclick="window.location.href='AgregarSaldo.html';"
+            class="invisible"
+            id="mostrarCard"
+          >
+            Mostrar Saldo
+          </button>
         </div>
       </div>
     </div>
@@ -49,121 +55,59 @@
       </div>
     </div>
 
-    <div class="div-absolute" id="addSaldo" style="display: none">
-      <h4 class="gris">Añadir una tarjeta</h4>
-      <form onsubmit="pendiente(event)">
-        <div class="div_tarjeta">
-          <div class="div_horizontal">
-            <div class="div_tarjeta">
-              <p class="TFormm">Saldo a agregar</p>
-              <input
-                placeholder=""
-                class="input_tarjetaG"
-                type="number"
-                id="numeroTarjeta"
-                name="numeroTarjeta"
-              />
-            </div>
-            <div class="div_tarjeta">
-              <p class="TFormm">CVV</p>
-              <input
-                placeholder=""
-                class="input_tarjetaP"
-                type="number"
-                id="cvv"
-                name="cvv"
-              />
-            </div>
-          </div>
-          <select>
-            <div class="div-pequeño" id="CardListPay"></div>
-          </select>
-        </div>
-        <button class="botonF" type="submit" onclick="crearCard(event)">
-          Ingresar
-        </button>
-        <button class="botonE" id="cerrarBoton">Cancelar</button>
-      </form>
-    </div>
-
     <div class="div-absolute" id="addCardContainer" style="display: none">
       <h4 class="gris">Añadir una tarjeta</h4>
-      <form onsubmit="crearCard(event)">
-        <div class="div_horizontal">
-          <div class="div_tarjeta">
-            <p class="TFormm">Numero de tarjeta</p>
-            <input
-              placeholder=""
-              class="input_tarjetaG"
-              type="number"
-              id="numeroTarjeta"
-              name="numeroTarjeta"
-            />
-          </div>
-          <div class="div_tarjeta">
-            <p class="TFormm">Banco</p>
-            <input
-              placeholder=""
-              class="input_tarjetaP"
-              type="text"
-              id="banco"
-              name="banco"
-            />
-          </div>
+      <div class="div_horizontal">
+        <div class="div_tarjeta">
+          <p class="TFormm">Numero de tarjeta</p>
+          <input
+            placeholder=""
+            class="input_tarjetaG"
+            type="number"
+            id="numeroTarjeta"
+            name="numeroTarjeta"
+          />
         </div>
-        <div class="div_horizontal">
-          <div class="div_tarjeta">
-            <p class="TFormm">CVV</p>
-            <input
-              placeholder=""
-              class="input_tarjetaG"
-              type="number"
-              id="cvvTarjeta"
-              name="cvvTarjeta"
-            />
-          </div>
-          <div class="div_tarjeta">
-            <p class="TFormm">Tipo</p>
-            <select class="input-tipo" id="tipo" name="tipo"></select>
-          </div>
+        <div class="div_tarjeta">
+          <p class="TFormm">Banco</p>
+          <input
+            placeholder=""
+            class="input_tarjetaP"
+            type="text"
+            id="banco"
+            name="banco"
+          />
         </div>
-        <br />
-        <button class="botonF" type="submit" onclick="crearCard(event)">
-          Ingresar
-        </button>
-        <button class="botonE" id="cerrarBoton">Cancelar</button>
-      </form>
+      </div>
+      <div class="div_horizontal">
+        <div class="div_tarjeta">
+          <p class="TFormm">CVV</p>
+          <input
+            placeholder=""
+            class="input_tarjetaG"
+            type="number"
+            id="cvvTarjeta"
+            name="cvvTarjeta"
+          />
+        </div>
+        <div class="div_tarjeta">
+          <p class="TFormm">Tipo</p>
+          <select class="input-tipo" id="tipo" name="tipo"></select>
+        </div>
+      </div>
+      <br />
+      <button
+        class="botonF"
+        type="button"
+        type="submit"
+        onclick="crearCard(event)"
+      >
+        Ingresar
+      </button>
+      <button class="botonE" type="button" id="cerrarBoton">Cancelar</button>
     </div>
 
     <script src="js/bankCard.js"></script>
+    <script src="js/logout.js"></script>
   </body>
-  <script>
-    document
-      .getElementById("mostrarBoton")
-      .addEventListener("click", function () {
-        var contenedor = document.getElementById("addCardContainer");
-        contenedor.style.display = "block";
-      });
-
-    document
-      .getElementById("cerrarBoton")
-      .addEventListener("click", function () {
-        var contenedor = document.getElementById("addCardContainer");
-        contenedor.style.display = "none";
-      });
-
-    document
-      .getElementById("mostrarCard")
-      .addEventListener("click", function () {
-        var contenedor = document.getElementById("addSaldo");
-        contenedor.style.display = "block";
-      });
-
-    document
-      .getElementById("cerrarCard")
-      .addEventListener("click", function () {
-        var contenedor = document.getElementById("addSaldo");
-        contenedor.style.display = "none";
-      });
-  </script>
 </html>

@@ -46,53 +46,14 @@ async function fetchCards() {
   }
 }
 
-async function fetchCardP() {
-  const response = await fetch("/payment-data", {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("auth-token"),
-      "Content-Type": "application/json",
-    },
-  });
-  if (!response.ok) {
-    throw new Error("Hubo un error al obtener los datos de las tarjetas");
-  }
-  const data = await response.json();
-  const h3 = document.querySelector("#saldo");
-  h3.textContent = data.saldo;
-  const divExterior = document.querySelector("#CardListPay");
-  for (let i = 0; i < data.cuentas.length; i++) {
-    const divInterior = document.createElement("div");
-    divInterior.innerHTML = `
-    <option>
-      <div class="tarjeta_fijo">
-        <div class="div_centrado">
-          <div>
-            <img class="tarjeta" src="${
-              data.cuentas[i].tipo === "Crédito"
-                ? "Assets/tarjetaMorada.png"
-                : "Assets/tarjetaNegra.png"
-            }">
-            <p class="p1">Cuenta ${data.cuentas[i].banco}</p>
-            <p class="p2">${hideCardNumber(data.cuentas[i].num_tarjeta)}</p>
-          </div>
-        </div>
-      </div>
-    </option>`;
-    divExterior.appendChild(divInterior);
-  }
-}
-
 document.addEventListener("DOMContentLoaded", fetchCards);
-document.addEventListener("DOMContentLoaded", fetchCardP);
 
 async function crearCard(event) {
   event.preventDefault();
-  const banco = document.querySelector("#banco").value;
-  const num_tarjeta = document.querySelector("#numeroTarjeta").value;
-  const cvv = document.querySelector("#cvvTarjeta").value;
-  const tipo = document.querySelector("#tipo").value;
-  console.log(banco, num_tarjeta, cvv, tipo);
+  const banco = document.getElementById("banco").value;
+  const num_tarjeta = document.getElementById("numeroTarjeta").value;
+  const cvv = document.getElementById("cvvTarjeta").value;
+  const tipo = document.getElementById("tipo").value;
   if (banco === "" || num_tarjeta === "" || cvv === "" || tipo === "") {
     alert("Por favor, llena todos los campos");
     return;
@@ -163,4 +124,14 @@ tipo.forEach(function (tipo) {
   option.value = tipo;
   option.text = tipo;
   selectTarjeta.appendChild(option);
+});
+
+document.getElementById("mostrarBoton").addEventListener("click", function () {
+  var contenedor = document.getElementById("addCardContainer");
+  contenedor.style.display = "block";
+});
+
+document.getElementById("cerrarBoton").addEventListener("click", function () {
+  var contenedor = document.getElementById("addCardContainer");
+  contenedor.style.display = "none";
 });
