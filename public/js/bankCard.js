@@ -2,6 +2,18 @@ function hideCardNumber(num_tarjeta) {
   return "**** **** **** " + String(num_tarjeta).slice(-4);
 }
 
+async function fetchCardExists(num_tarjeta) {
+  const response = await fetch("/card-exists", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ numero: num_tarjeta }),
+  });
+  const data = await response.json();
+  return data.exists[0].length > 0;
+}
+
 async function fetchCards() {
   const response = await fetch("/payment-data", {
     method: "GET",
@@ -64,6 +76,15 @@ async function crearCard(event) {
   }
   if (cvv.length !== 3) {
     alert("El CVV debe tener 3 dígitos");
+    return;
+  }
+  if (isNaN(num_tarjeta)) {
+    alert("El número de tarjeta debe ser un número");
+    return;
+  }
+  const cardExists = await fetchCardExists(num_tarjeta);
+  if (cardExists) {
+    alert("La tarjeta ya está registrada");
     return;
   }
   const response = await fetch("/add-card", {

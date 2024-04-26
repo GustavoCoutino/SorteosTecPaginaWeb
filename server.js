@@ -304,6 +304,37 @@ app.post("/update-saldo", authenticateToken, (req, res) => {
   );
 });
 
+app.post("/email-exists", (req, res) => {
+  const email = req.body.email;
+  console.log(email);
+  connection.query(
+    "Call SorteosTec.EmailExists(?)",
+    [email],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "Error del servidor" });
+      }
+      console.log(results);
+      res.json({ exists: results });
+    }
+  );
+});
+
+app.post("/card-exists", authenticateToken, (req, res) => {
+  const userId = req.user.userId;
+  const numero = req.body.numero;
+  connection.query(
+    "CALL SorteosTec.TarjetaExists(?, ?)",
+    [userId, numero],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "Error del servidor" });
+      }
+      res.json({ exists: results });
+    }
+  );
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Servidor backend escuchando en el puerto ${PORT}`);

@@ -16,6 +16,24 @@ function formatCurrentDate() {
   return `${year}-${formattedMonth}-${formattedDay} ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 }
 
+function validarCorreo(correo) {
+  const expresion = /\S+@\S+\.\S+/;
+  return expresion.test(correo);
+}
+
+async function fetchEmailExists(email) {
+  const response = await fetch("http://localhost:3001/email-exists", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email: email }),
+  });
+
+  const data = await response.json();
+  return data.exists[0].length > 0;
+}
+
 async function crearUsuario(event) {
   event.preventDefault();
   const nombre = document.getElementById("nombre").value;
@@ -27,6 +45,30 @@ async function crearUsuario(event) {
   const apellido_materno = document.getElementById("apellido_materno").value;
   const apellido_paterno = document.getElementById("apellido_paterno").value;
   const fecha_registro = formatCurrentDate();
+
+  if (
+    nombre === "" ||
+    email === "" ||
+    contraseña === "" ||
+    telefono === "" ||
+    estado === "" ||
+    ciudad === "" ||
+    apellido_materno === "" ||
+    apellido_paterno === ""
+  ) {
+    alert("Por favor, llena todos los campos");
+  }
+
+  if (!validarCorreo(email)) {
+    alert("Correo inválido");
+    return;
+  }
+
+  const emailExists = await fetchEmailExists(email);
+  if (emailExists) {
+    alert("El correo ya está registrado");
+    return;
+  }
 
   const nuevoUsuario = {
     nombre: nombre,
