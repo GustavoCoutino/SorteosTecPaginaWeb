@@ -6,7 +6,7 @@ function fechaFormato(dateString) {
   const date = new Date(dateString);
   const options = { day: "numeric", month: "long", year: "numeric" };
   const formattedDate = date.toLocaleDateString("es-ES", options);
-  return `Adquirido el ${formattedDate}`;
+  return `${formattedDate}`;
 }
 
 async function fetchCards() {
@@ -81,7 +81,6 @@ async function getMovimientos() {
     throw new Error("Hubo un error al obtener los datos de los movimientos");
   }
   const data = await response.json();
-  console.log(data.cargas[0]);
   const divExterior = document.getElementById("movementsContainer");
   for (let i = 0; i < data.cargas[0].length; i++) {
     const divInterior = document.createElement("div");

@@ -73,15 +73,15 @@ app.get("/es-admin", authenticateToken, (req, res) => {
 app.get("/monedas-totales", authenticateToken, (req, res) => {
   const id = req.user.userId;
   connection.query(
-    "CALL SorteosTec.GetSaldoMonedasByUsuarioId(?);",
+    "CALL SorteosTec.GetTarjetasAndSaldoByUsuarioId(?);",
     [id],
     (error, results) => {
       if (error) {
         return res.status(500).json({ message: "Error del servidor" });
       }
       if (results.length > 0) {
-        const monedas = results[0][0].monedas;
-        res.json({ monedas: monedas });
+        const { monedasBoletos } = results[1][0];
+        res.json({ monedas: monedasBoletos });
       } else {
         res.status(404).json({ message: "Usuario no encontrado" });
       }
@@ -170,6 +170,50 @@ app.post("/signin", (req, res) => {
   );
 });
 
+app.post("/signin-admin", authenticateToken, (req, res) => {
+  const {
+    nombre,
+    apellido_materno,
+    apellido_paterno,
+    estado,
+    ciudad,
+    password,
+    email,
+    telefono,
+    fecha_registro,
+  } = req.body;
+
+  const query = `CALL CreateAdmin(?, ?, ?, ?, ?, ?, ?, ?, ?);`;
+
+  connection.query(
+    query,
+    [
+      email,
+      telefono,
+      estado,
+      ciudad,
+      password,
+      nombre,
+      apellido_materno,
+      apellido_paterno,
+      fecha_registro,
+    ],
+    (error, results) => {
+      if (error) {
+        console.error("Error al ejecutar la consulta de registro:", error);
+        return res
+          .status(500)
+          .json({ error: "Error en el servidor al intentar registrarse" });
+      }
+      console.log("Usuario registrado exitosamente:", email);
+      res.status(200).json({
+        success: true,
+        message: "Usuario registrado exitosamente",
+      });
+    }
+  );
+});
+
 app.get("/user-info", authenticateToken, (req, res) => {
   const userId = req.user.userId;
   connection.query(
@@ -217,7 +261,7 @@ app.get("/payment-data", authenticateToken, (req, res) => {
         return res.status(500).json({ message: "Error del servidor" });
       }
       if (results.length > 0) {
-        const { saldo } = results[1][0] ? results[1][0] : { saldo: 0 };
+        const { saldo } = results[1][0];
         res.json({
           cuentas: results[0],
           saldo: saldo,
@@ -262,7 +306,6 @@ app.post("/delete-card", authenticateToken, (req, res) => {
 app.post("/update-game-session", (req, res) => {
   const { puntaje, monedas, usuarioId, nombreJuego, tiempoJugado, fecha } =
     req.body;
-  console.log(req.body);
   connection.query(
     "CALL SorteosTec.CreateEstructura(?, ?, ?, ?, ?, ?)",
     [puntaje, monedas, usuarioId, nombreJuego, tiempoJugado, fecha],
@@ -306,7 +349,6 @@ app.post("/update-saldo", authenticateToken, (req, res) => {
 
 app.post("/email-exists", (req, res) => {
   const email = req.body.email;
-  console.log(email);
   connection.query(
     "Call SorteosTec.EmailExists(?)",
     [email],
@@ -314,7 +356,6 @@ app.post("/email-exists", (req, res) => {
       if (error) {
         return res.status(500).json({ message: "Error del servidor" });
       }
-      console.log(results);
       res.json({ exists: results });
     }
   );

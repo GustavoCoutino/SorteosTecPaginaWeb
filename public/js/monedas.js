@@ -14,11 +14,7 @@ async function fetchSaldo() {
     }
     const data = await response.json();
     const monedas = document.querySelector("#cantidad-monedas");
-    if (data.monedas === null) {
-      monedas.textContent = "0";
-    } else {
-      monedas.textContent = data.monedas;
-    }
+    monedas.textContent = data.monedas;
   } catch (error) {
     console.error("Error:", error);
   }
