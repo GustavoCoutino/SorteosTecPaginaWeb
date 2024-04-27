@@ -303,9 +303,9 @@ app.post("/delete-card", authenticateToken, (req, res) => {
   );
 });
 
-app.post("/update-game-session", (req, res) => {
-  const { puntaje, monedas, usuarioId, nombreJuego, tiempoJugado, fecha } =
-    req.body;
+app.post("/update-game-session", authenticateToken, (req, res) => {
+  const usuarioId = req.user.userId;
+  const { puntaje, monedas, nombreJuego, tiempoJugado, fecha } = req.body;
   connection.query(
     "CALL SorteosTec.CreateEstructura(?, ?, ?, ?, ?, ?)",
     [puntaje, monedas, usuarioId, nombreJuego, tiempoJugado, fecha],
