@@ -26,6 +26,12 @@
       <p class="centro">¿Qué te gustaría jugar hoy?</p>
     </div>
     <br />
+    <div class="div-absolute" id="addCardContainer" style="display: none">
+      <h4 class="gris" id="nombreJuegoParrafo"></h4>
+      <p class="pregunta">¿Quiéres pagar para jugar?</p>
+      <button class="botonF" id="realizarCompra">Pagar</button>
+      <button class="botonE" id="cerrarBoton">Cancelar</button>
+    </div>
     <div class="div_centrado">
       <div class="div-absolute" id="addSaldo" style="display: none">
         <h4 class="gris">Agregar saldo</h4>
@@ -36,25 +42,43 @@
       </div>
       <div class="div_horizontal">
         <div>
-          <div class="cuadro_v">
-            <a href="CorreTeusV1/index.html">AAA</a>
-            <p class="nomjuego_v">GameTec</p>
-            <img src="Assets/escudoVerde.png" class="juego" />
-          </div>
+          <a
+            data-game-url="CorreTeusV1/index.html"
+            data-producto-id="21"
+            class="gameButton"
+            data-game-name="Game Tec"
+          >
+            <div class="cuadro_v">
+              <p class="nomjuego_v">Corre Teus</p>
+              <img src="Assets/escudoVerde.png" class="juego" />
+            </div>
+          </a>
         </div>
-
         <div>
-          <div class="cuadro_g">
-            <p class="nomjuego_g">DefenTec</p>
-            <img src="Assets/escudoAzul.png" class="juego" />
-          </div>
+          <a
+            data-game-url="Lanza/index.html"
+            data-producto-id="22"
+            class="gameButton"
+            data-game-name="Lanza Tec"
+          >
+            <div class="cuadro_a">
+              <p class="nomjuego_a">Lanza Tec</p>
+              <img src="Assets/escudoPared.png" class="juego" />
+            </div>
+          </a>
         </div>
-
         <div>
-          <div class="cuadro_a">
-            <p class="nomjuego_a">LanzaTec</p>
-            <img src="Assets/escudoPared.png" class="juego" />
-          </div>
+          <a
+            data-game-url="End Game/index.html"
+            data-producto-id="23"
+            class="gameButton"
+            data-game-name="End Game"
+          >
+            <div class="cuadro_g">
+              <p class="nomjuego_g">End Game</p>
+              <img src="Assets/escudoAzul.png" class="juego" />
+            </div>
+          </a>
         </div>
       </div>
     </div>

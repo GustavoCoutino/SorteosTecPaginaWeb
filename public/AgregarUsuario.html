@@ -21,7 +21,7 @@
         <p class="TTercero">Solo por tener perfil de administrador puedes crear usuarios.</p>
     </div>
 
-    <form id="formulario-usuario" onsubmit="crearUsuario(event)">
+    <form id="formulario-usuario" onsubmit="crearUsuarioAdmin(event)">
             <div class="div_horizontal">
                 <div class="div_gris">
                     <p class="TForm">Nombre</p>
@@ -29,16 +29,16 @@
                 </div>
                 <div class="div_gris">
                     <p class="TForm">Apellido Paterno</p>
-                    <input placeholder="Gonzalez" class="input_forms" id="apellido_paterno" name="nombre"/>
+                    <input placeholder="Gonzalez" class="input_forms" id="apellido_paterno" name="apellido_paterno"/>
                 </div>
                 <div class="div_gris">
                     <p class="TForm">Apellido Materno</p>
-                    <input placeholder="Pérez" class="input_forms" id="apellido_materno" name="nombre" />
+                    <input placeholder="Pérez" class="input_forms" id="apellido_materno" name="apellido_materno" />
                 </div>
             </div>
 
             <div class="div_horizontal">
-                <div class="div_gris">
+                <div class="div_gris"> 
                     <p class="TForm">Estado</p>
                     <select class="input_forms" id="estado" name="estado">
                         <!-- Las opciones de los estados se generarán aquí -->
@@ -53,7 +53,7 @@
                     <div class="div_horizontal">
                         <div>
                             <p class="TForm">Contraseña</p>
-                            <input placeholder="12345" class="input_forms" type="contraseña" id="contraseña" />
+                            <input placeholder="12345" class="input_forms" type="password" id="contraseña" name="contraseña"/>
                         </div>
                         <i id="togglePassword" class="fas fa-eye password-icon" onclick="togglePasswordVisibility()"></i>
                     </div>
@@ -69,13 +69,19 @@
                     <p class="TForm">Teléfono</p>
                     <input placeholder="+55 7896 2381" class="input_forms" type="tel" id="telefono" name="telefono"/>
                 </div>
+                <div class="div_gris">
+                    <p class="TForm">Perfil</p>
+                    <select class="input_forms" id="perfil" name="perfil">
+                        <!-- Las opciones de los estados se generarán aquí -->
+                    </select>
+                </div>
             </div>
             <br/>
             <p class="error" id="error"></p>
             <br/>
             <button class="botonF" type="submit">Crear usuario</button>
             <img class="imageForm" src="Assets/escudoAzul.png"/>
-    </form> 
+    </form>
 
     <script src="js/signin.js"></script>
 </body>

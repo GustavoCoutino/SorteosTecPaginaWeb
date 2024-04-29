@@ -251,6 +251,21 @@ app.get("/wallet-info", authenticateToken, (req, res) => {
   );
 });
 
+app.post("/buy-access", authenticateToken, (req, res) => {
+  const userId = req.user.userId;
+  const { productoId, fecha, nombreJuego } = req.body;
+  connection.query(
+    "CALL SorteosTec.CreateCompra(?, ?, ?, ?)",
+    [userId, productoId, fecha, nombreJuego],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "No hay suficiente saldo" });
+      }
+      res.json({ success: true, message: "Compra realizada exitosamente" });
+    }
+  );
+});
+
 app.get("/payment-data", authenticateToken, (req, res) => {
   const userId = req.user.userId;
   connection.query(

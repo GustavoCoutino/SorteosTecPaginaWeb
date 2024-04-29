@@ -154,6 +154,11 @@ h2 {
   font-size: 21px;
 }
 
+.pregunta {
+  margin-top: -10px;
+  margin-bottom: 30px;
+  color: #585554;
+}
 /* BOTONES */
 .botonO,
 .botonG,
@@ -308,6 +313,12 @@ i {
 }
 
 .tarjeta {
+  width: 70px;
+  height: 45px;
+}
+
+.tarjetaa {
+  margin-left: 150px;
   width: 70px;
   height: 45px;
 }
@@ -603,4 +614,42 @@ i {
   font-size: 28px;
   margin-bottom: 50px;
   margin-top: -5px;
+}
+
+.espacio-arriba {
+  margin-top: 40px;
+}
+
+/* MOVIMIENTOS */
+
+.div_gris {
+  background-color: #f3f3f3;
+  border-radius: 20px;
+  justify-content: center;
+  text-align: left;
+  width: 500px;
+  align-items: center;
+}
+
+.saldo {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.extra {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.div_horizontall {
+  display: flex;
+  flex-direction: row;
+}
+
+.div_centradoo {
+  text-align: center;
+  justify-content: center;
+  margin-top: 10px;
 }

@@ -16,24 +16,6 @@ function formatCurrentDate() {
   return `${year}-${formattedMonth}-${formattedDay} ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 }
 
-function validarCorreo(correo) {
-  const expresion = /\S+@\S+\.\S+/;
-  return expresion.test(correo);
-}
-
-async function fetchEmailExists(email) {
-  const response = await fetch("http://localhost:3001/email-exists", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email: email }),
-  });
-
-  const data = await response.json();
-  return data.exists[0].length > 0;
-}
-
 async function crearUsuario(event) {
   event.preventDefault();
   const nombre = document.getElementById("nombre").value;
@@ -46,27 +28,9 @@ async function crearUsuario(event) {
   const apellido_paterno = document.getElementById("apellido_paterno").value;
   const fecha_registro = formatCurrentDate();
 
-  if (
-    nombre === "" ||
-    email === "" ||
-    contraseña === "" ||
-    telefono === "" ||
-    estado === "" ||
-    ciudad === "" ||
-    apellido_materno === "" ||
-    apellido_paterno === ""
-  ) {
-    alert("Por favor, llena todos los campos");
-  }
-
-  if (!validarCorreo(email)) {
-    alert("Correo inválido");
-    return;
-  }
-
-  const emailExists = await fetchEmailExists(email);
-  if (emailExists) {
-    alert("El correo ya está registrado");
+  if (telefono.length > 10 || telefono.length < 10) {
+    document.getElementById("error").innerText =
+      "El número de teléfono debe de contener 10 dígitos";
     return;
   }
 
@@ -95,9 +59,107 @@ async function crearUsuario(event) {
   }
 }
 
+async function crearUsuarioAdmin(event) {
+  event.preventDefault();
+
+  const perfil = document.getElementById("perfil").value;
+
+  if (perfil === "Administrador") {
+    crearAdmindAdmin(event);
+  } else if (perfil === "Usuario") {
+    crearUsuariodAdmin(event);
+  }
+}
+
+async function crearUsuariodAdmin(event) {
+  event.preventDefault();
+  const nombre = document.getElementById("nombre").value;
+  const email = document.getElementById("correo").value;
+  const contraseña = document.getElementById("contraseña").value;
+  const telefono = document.getElementById("telefono").value;
+  const estado = document.getElementById("estado").value;
+  const ciudad = document.getElementById("ciudad").value;
+  const apellido_materno = document.getElementById("apellido_materno").value;
+  const apellido_paterno = document.getElementById("apellido_paterno").value;
+  const fecha_registro = formatCurrentDate();
+
+  if (telefono.length > 10 || telefono.length < 10) {
+    document.getElementById("error").innerText =
+      "El número de teléfono debe de contener 10 dígitos";
+    return;
+  }
+
+  const nuevoUsuario = {
+    nombre: nombre,
+    email: email,
+    password: contraseña,
+    telefono: telefono,
+    estado: estado,
+    ciudad: ciudad,
+    apellido_materno: apellido_materno,
+    apellido_paterno: apellido_paterno,
+    fecha_registro: fecha_registro,
+  };
+  const response = await fetch("http://localhost:3001/signin", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(nuevoUsuario),
+  });
+
+  const data = await response.json();
+  if (data.success) {
+    window.location.href = "Estadisticas.html";
+  }
+}
+
+async function crearAdmindAdmin(event) {
+  event.preventDefault();
+  const nombre = document.getElementById("nombre").value;
+  const email = document.getElementById("correo").value;
+  const contraseña = document.getElementById("contraseña").value;
+  const telefono = document.getElementById("telefono").value;
+  const estado = document.getElementById("estado").value;
+  const ciudad = document.getElementById("ciudad").value;
+  const apellido_materno = document.getElementById("apellido_materno").value;
+  const apellido_paterno = document.getElementById("apellido_paterno").value;
+  const fecha_registro = formatCurrentDate();
+
+  if (telefono.length > 10 || telefono.length < 10) {
+    document.getElementById("error").innerText =
+      "El número de teléfono debe de contener 10 dígitos";
+    return;
+  }
+
+  const nuevoUsuario = {
+    nombre: nombre,
+    email: email,
+    password: contraseña,
+    telefono: telefono,
+    estado: estado,
+    ciudad: ciudad,
+    apellido_materno: apellido_materno,
+    apellido_paterno: apellido_paterno,
+    fecha_registro: fecha_registro,
+  };
+  const response = await fetch("http://localhost:3001/signin-admin", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(nuevoUsuario),
+  });
+
+  const data = await response.json();
+  if (data.success) {
+    window.location.href = "Estadisticas.html";
+  }
+}
+
 function togglePasswordVisibility() {
-  const passwordInput = document.getElementById("contraseña");
-  const toggleIcon = document.getElementById("togglePassword");
+  var passwordInput = document.getElementById("contraseña");
+  var toggleIcon = document.getElementById("togglePassword");
 
   if (passwordInput.type === "password") {
     passwordInput.type = "text";
@@ -152,4 +214,15 @@ estadosMexico.forEach(function (estado) {
   option.value = estado;
   option.text = estado;
   selectEstado.appendChild(option);
+});
+
+var perfilesCuenta = ["Usuario", "Administrador"];
+
+var selectPerfil = document.getElementById("perfil");
+
+perfilesCuenta.forEach(function (perfil) {
+  var option = document.createElement("option");
+  option.value = perfil;
+  option.text = perfil;
+  selectPerfil.appendChild(option);
 });

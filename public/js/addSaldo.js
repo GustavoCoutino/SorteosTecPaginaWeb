@@ -83,14 +83,39 @@ async function getMovimientos() {
   const data = await response.json();
   const divExterior = document.getElementById("movementsContainer");
   for (let i = 0; i < data.cargas[0].length; i++) {
+    const imagen = document.createElement("img");
+    imagen.src = "./../Assets/walletMoneda.png";
+    imagen.classList.add("compra");
+
     const divInterior = document.createElement("div");
-    const formattedElement = document.createElement("p");
-    formattedElement.textContent = `Saldo agregado: ${
-      data.cargas[0][i].saldoAgregado
-    } - Realizado el ${fechaFormato(
-      data.cargas[0][i].fecha
-    )} con la tarjeta ${hideCardNumber(data.cargas[0][i].numeroTarjeta)}`;
-    divInterior.appendChild(formattedElement);
+    divInterior.classList.add("div_gris");
+
+    const div_horizontal = document.createElement("div");
+    div_horizontal.classList.add("div_horizontall");
+
+    const div_cont = document.createElement("div");
+    div_horizontal.classList.add("div_vertical");
+
+    const saldo = document.createElement("p");
+    saldo.classList.add("saldo");
+    saldo.textContent = `Recarga: $${data.cargas[0][i].saldoAgregado} mxn `;
+    const fecha = document.createElement("p");
+    fecha.classList.add("extra");
+    fecha.textContent = `Fecha: ${fechaFormato(data.cargas[0][i].fecha)}`;
+    const tarjeta = document.createElement("p");
+    tarjeta.classList.add("extra");
+    tarjeta.textContent = `Tarjeta: ${hideCardNumber(
+      data.cargas[0][i].numeroTarjeta
+    )}`;
+
+    div_cont.appendChild(saldo);
+    div_cont.appendChild(fecha);
+    div_cont.appendChild(tarjeta);
+
+    div_horizontal.appendChild(imagen);
+    div_horizontal.appendChild(div_cont);
+
+    divInterior.appendChild(div_horizontal);
 
     divExterior.appendChild(divInterior);
   }
