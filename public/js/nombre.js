@@ -51,7 +51,6 @@ document.querySelectorAll(".gameButton").forEach((button) => {
     contenedor.style.zIndex = "1000";
 
     document.getElementById("nombreJuegoParrafo").textContent =
-      "Selected Game: " +
       this.querySelector(".nomjuego_v, .nomjuego_g, .nomjuego_a").textContent;
 
     document.getElementById("realizarCompra").onclick = function () {
