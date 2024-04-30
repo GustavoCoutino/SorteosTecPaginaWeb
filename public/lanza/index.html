@@ -28,6 +28,7 @@
         console.log("Unity game has requested exit.");
         window.location.href = "http://localhost:3001/Juegos.html";
       }
+
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
       var loadingBar = document.querySelector("#unity-loading-bar");
@@ -63,11 +64,11 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/html.loader.js";
+      var loaderUrl = buildUrl + "/Lanza.loader.js";
       var config = {
-        dataUrl: buildUrl + "/html.data",
-        frameworkUrl: buildUrl + "/html.framework.js",
-        codeUrl: buildUrl + "/html.wasm",
+        dataUrl: buildUrl + "/Lanza.data",
+        frameworkUrl: buildUrl + "/Lanza.framework.js",
+        codeUrl: buildUrl + "/Lanza.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Lanza",
