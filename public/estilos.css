@@ -207,6 +207,23 @@ h2 {
   border-radius: 10px;
 }
 
+.botonBo {
+  background-color: #1b64b5;
+  color: #ffffff;
+  border: none;
+  font-size: 20px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 10px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .botonE,
 .botonET,
 .botonAT {

@@ -391,6 +391,44 @@ app.post("/card-exists", authenticateToken, (req, res) => {
   );
 });
 
+app.get("/boletos", authenticateToken, (req, res) => {
+  connection.query("Call SorteosTec.GetAllBoletos();", (error, results) => {
+    if (error) {
+      return res.status(500).json({ message: "Error del servidor" });
+    }
+    res.json(results[0]);
+  });
+});
+
+app.post("/comprar-boleto", authenticateToken, (req, res) => {
+  const userId = req.user.userId;
+  const { boletoId, fecha } = req.body;
+  connection.query(
+    "CALL SorteosTec.InsertarCompraBoleto(?, ?, ?)",
+    [userId, boletoId, fecha],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "Error del servidor" });
+      }
+      res.json({ success: true, message: "Boleto comprado exitosamente" });
+    }
+  );
+});
+
+app.post("/compra-boleto-info", authenticateToken, (req, res) => {
+  const userId = req.user.userId;
+  connection.query(
+    "CALL SorteosTec.ObtenerComprasUsuario(?)",
+    [userId],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: "Error del servidor" });
+      }
+      res.json(results[0]);
+    }
+  );
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Servidor backend escuchando en el puerto ${PORT}`);

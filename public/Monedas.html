@@ -15,7 +15,10 @@
     </a>
     <a class="botonG" onclick="logout()">Sign out</a>
     <p class="TTitulo">Monedas</p>
-
+    <div class="div-absolute" id="addCardContainer" style="display: none">
+      <h4 class="gris">¿Quiéres comprar un boleto?</h4>
+      <button class="botonE" id="cerrarBoton">Cancelar</button>
+    </div>
     <div class="div_centrado">
       <div class="div_grisInfo">
         <div class="div_centrado">
@@ -31,16 +34,13 @@
       <div>
         <h3>Boleto Sorteos Tec</h3>
         <div class="div_centrado">
-          <p>50 monedas</p>
+          <div class="div-pequeño" id="boletosContainer"></div>
         </div>
       </div>
     </div>
     <div class="div_centrado">
-      <a
-        href="https://www.sorteostec.org/carrito/seleccion-boletos"
-        class="botonN"
-        >Adquirir</a
-      >
+      <a id="mostrarBoton" class="botonN">Adquirir</a>
+    </div>
     </div>
     <script src="js/logout.js"></script>
     <script src="js/monedas.js"></script>
