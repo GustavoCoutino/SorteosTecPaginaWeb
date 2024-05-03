@@ -55,14 +55,14 @@ function authenticateToken(req, res, next) {
 app.get("/es-admin", authenticateToken, (req, res) => {
   const id = req.user.userId;
   connection.query(
-    "SELECT esAdmin FROM Usuario WHERE usuario_id = ?",
+    "SELECT admin_id FROM Usuario WHERE usuario_id = ?",
     [id],
     (error, results) => {
       if (error) {
         return res.status(500).json({ message: "Error del servidor" });
       }
       if (results.length > 0) {
-        res.json({ esAdmin: results[0].esAdmin });
+        res.json({ esAdmin: results[0].admin_id });
       } else {
         res.status(404).json({ message: "Usuario no encontrado" });
       }
@@ -104,10 +104,10 @@ app.post("/login", (req, res) => {
     if (results.length > 0) {
       const user = results[0];
       const token = jwt.sign(
-        { userId: user.usuario_id, role: user.esAdmin },
+        { userId: user.usuario_id, role: user.admin_id },
         process.env.JWT_SECRET,
         {
-          expiresIn: "1h",
+          expiresIn: "24h",
         }
       );
       res.cookie("auth-token", token, { httpOnly: true, sameSite: "strict" });
@@ -115,7 +115,7 @@ app.post("/login", (req, res) => {
       res.status(200).json({
         success: true,
         message: "Inicio de sesión exitoso",
-        role: results[0].esAdmin,
+        role: results[0].admin_id,
       });
     } else {
       console.log("Credenciales inválidas para:", usuario);
