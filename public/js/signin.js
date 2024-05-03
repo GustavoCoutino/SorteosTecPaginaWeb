@@ -28,6 +28,22 @@ async function crearUsuario(event) {
   const apellido_paterno = document.getElementById("apellido_paterno").value;
   const fecha_registro = formatCurrentDate();
 
+  if (
+    nombre === "" ||
+    email === "" ||
+    contraseña === "" ||
+    telefono === "" ||
+    estado === "" ||
+    ciudad === "" ||
+    apellido_materno === "" ||
+    apellido_paterno === "" ||
+    telefono === ""
+  ) {
+    document.getElementById("error").innerText =
+      "Todos los campos son obligatorios";
+    return;
+  }
+
   if (telefono.length > 10 || telefono.length < 10) {
     document.getElementById("error").innerText =
       "El número de teléfono debe de contener 10 dígitos";
@@ -82,6 +98,21 @@ async function crearUsuariodAdmin(event) {
   const apellido_materno = document.getElementById("apellido_materno").value;
   const apellido_paterno = document.getElementById("apellido_paterno").value;
   const fecha_registro = formatCurrentDate();
+
+  if (
+    nombre === "" ||
+    email === "" ||
+    contraseña === "" ||
+    telefono === "" ||
+    estado === "" ||
+    ciudad === "" ||
+    apellido_materno === "" ||
+    apellido_paterno === ""
+  ) {
+    document.getElementById("error").innerText =
+      "Todos los campos son obligatorios";
+    return;
+  }
 
   if (telefono.length > 10 || telefono.length < 10) {
     document.getElementById("error").innerText =
