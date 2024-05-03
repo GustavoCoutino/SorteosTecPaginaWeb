@@ -1,20 +1,3 @@
-function formatCurrentDate(now) {
-  const year = now.getFullYear();
-  const month = now.getMonth() + 1;
-  const day = now.getDate();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  const seconds = now.getSeconds();
-
-  const formattedMonth = month.toString().padStart(2, "0");
-  const formattedDay = day.toString().padStart(2, "0");
-  const formattedHours = hours.toString().padStart(2, "0");
-  const formattedMinutes = minutes.toString().padStart(2, "0");
-  const formattedSeconds = seconds.toString().padStart(2, "0");
-
-  return `${year}-${formattedMonth}-${formattedDay} ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
-}
-
 async function fetchSaldo() {
   try {
     const response = await fetch("/monedas-totales", {
@@ -66,7 +49,7 @@ async function fetchBoletos() {
             },
             body: JSON.stringify({
               boletoId: boleto.boleto_id,
-              fecha: formatCurrentDate(new Date()),
+              fecha: new Date().toISOString().slice(0, 19).replace("T", " "),
             }),
           });
           if (!data.ok) {
@@ -121,9 +104,7 @@ async function fetchBoletoPurchases() {
       p1.className = "p1";
       p2.className = "p2";
       p1.textContent = `Boleto: ${purchase.tipo}`;
-      p2.textContent = `Costo: ${
-        purchase.costo
-      } monedas - Fecha: ${formatCurrentDate(purchase.fecha)}`;
+      p2.textContent = `Costo: ${purchase.costo} monedas - Fecha: ${purchase.fecha}`;
       purchaseDiv.appendChild(p1);
       purchaseDiv.appendChild(p2);
       boletosContainer.appendChild(purchaseDiv);
