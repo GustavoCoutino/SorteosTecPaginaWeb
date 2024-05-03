@@ -1,3 +1,10 @@
+function fechaFormato(dateString) {
+  const date = new Date(dateString);
+  const options = { day: "numeric", month: "long", year: "numeric" };
+  const formattedDate = date.toLocaleDateString("es-ES", options);
+  return `Adquirido el ${formattedDate}`;
+}
+
 async function fetchSaldo() {
   try {
     const response = await fetch("/monedas-totales", {
@@ -104,7 +111,9 @@ async function fetchBoletoPurchases() {
       p1.className = "p1";
       p2.className = "p2";
       p1.textContent = `Boleto: ${purchase.tipo}`;
-      p2.textContent = `Costo: ${purchase.costo} monedas - Fecha: ${purchase.fecha}`;
+      p2.textContent = `Costo: ${
+        purchase.costo
+      } monedas - Fecha: ${fechaFormato(purchase.fecha)}`;
       purchaseDiv.appendChild(p1);
       purchaseDiv.appendChild(p2);
       boletosContainer.appendChild(purchaseDiv);
